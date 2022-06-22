@@ -11,30 +11,19 @@ namespace Hosting
     {
         public static void Main()
         {
-            var hostBuilder = Host.CreateDefaultBuilder()
-                .UseDefaultServiceProvider(options =>
-                {
-                    options.ValidateOnBuild = true;
-                })
+            CreateHostBuilder().Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder() =>
+            Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton(typeof(ILoggerFactory), typeof(DebugLoggerFactory));
+                    services.AddSingleton(typeof(IHardwareService), typeof(HardwareService));
+                    services.AddHostedService(typeof(Led1HostedService));
+                    services.AddHostedService(typeof(Led2HostedService));
+                    services.AddHostedService(typeof(Led3HostedService));
                     services.AddHostedService(typeof(TestBackgroundService));
-                }).Build();
-            
-            hostBuilder.Start();
-
-            Thread.Sleep(5000);
-            
-            hostBuilder.Stop();
-
-            Thread.Sleep(5000);
-
-            hostBuilder.Dispose();
-
-            Thread.Sleep(5000);
-
-            hostBuilder.Run();
-        }
+                });
     }
 }

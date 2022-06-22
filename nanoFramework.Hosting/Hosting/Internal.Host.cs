@@ -45,7 +45,7 @@ namespace nanoFramework.Hosting.Internal
                 }
                 catch (Exception ex)
                 {
-                    exceptions = exceptions ?? new ArrayList();
+                    exceptions ??= new ArrayList();
                     exceptions.Add(ex);
                 }
             }
@@ -59,7 +59,7 @@ namespace nanoFramework.Hosting.Internal
         /// <inheritdoc />
         public void Stop()
         {
-            ArrayList exceptions = new ArrayList();
+            ArrayList exceptions = null;
             foreach (IHostedService hostedService in _hostedServices)
             {
                 try
@@ -68,11 +68,12 @@ namespace nanoFramework.Hosting.Internal
                 }
                 catch (Exception ex)
                 {
+                    exceptions ??= new ArrayList();
                     exceptions.Add(ex);
                 }
             }
 
-            if (exceptions.Count > 0)
+            if (exceptions != null)
             {
                 throw new AggregateException("One or more hosted services failed to stop.", exceptions); ;
             }

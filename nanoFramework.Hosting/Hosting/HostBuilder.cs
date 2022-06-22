@@ -12,8 +12,9 @@ namespace nanoFramework.Hosting
     {
         private bool _hostBuilt;
         private IServiceProvider _appServices;
-        private ServiceProviderOptions _providerOptions = new ServiceProviderOptions() ;
         private HostBuilderContext _hostBuilderContext;
+        private ServiceProviderOptions _providerOptions;
+
         private readonly ArrayList _configureServicesActions = new ArrayList();
 
         /// <inheritdoc />
@@ -29,6 +30,7 @@ namespace nanoFramework.Hosting
         /// <inheritdoc />
         public IHostBuilder UseDefaultServiceProvider(ProviderContextDelegate configureDelegate)
         {
+            _providerOptions = new ServiceProviderOptions();
             configureDelegate(_hostBuilderContext, _providerOptions);
             return this;
         }
@@ -56,7 +58,15 @@ namespace nanoFramework.Hosting
                 configureServicesAction(_hostBuilderContext, services);
             }
 
-            _appServices = services.BuildServiceProvider(_providerOptions);
+            if (_providerOptions == null)
+            {
+                _appServices = services.BuildServiceProvider();
+            }
+            else
+            {
+                _appServices = services.BuildServiceProvider(_providerOptions);
+            }
+
             if (_appServices == null)
             {
                 throw new InvalidOperationException($"The BuildServiceProvider returned a null ServiceProvider.");

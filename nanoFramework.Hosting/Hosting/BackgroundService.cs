@@ -23,15 +23,12 @@ namespace nanoFramework.Hosting
         public virtual Thread ExecuteThread() => _executeThread;
 
         /// <summary>
-        /// This method is called when the <see cref="IHostedService"/> starts. The implementation should return a task that represents
+        /// This method is called when the <see cref="IHostedService"/> starts. The implementation should return a thread that represents
         /// the lifetime of the long running operation(s) being performed.
         /// </summary>
-        /// <returns>A <see cref="Thread"/> that represents the long running operations.</returns>
         protected abstract void ExecuteAsync(CancellationToken stoppingToken);
 
-        /// <summary>
-        /// Triggered when the application host is ready to start the service.
-        /// </summary>
+        /// <inheritdoc />
         public virtual void StartAsync()
         {
             _stoppingCts = new CancellationTokenSource();
@@ -43,9 +40,7 @@ namespace nanoFramework.Hosting
             });
         }
 
-        /// <summary>
-        /// Triggered when the application host is performing a graceful shutdown.
-        /// </summary>
+        /// <inheritdoc />
         public virtual void StopAsync()
         {
             if (_executeThread == null)
@@ -66,6 +61,7 @@ namespace nanoFramework.Hosting
             }
         }
 
+        /// <inheritdoc />
         public virtual void Dispose()
         {
             _stoppingCts?.Dispose();

@@ -27,7 +27,7 @@
     <Compile Include="Hosting\IHost.cs" />
     <Compile Include="Hosting\IHostBuilder.cs" />
     <Compile Include="Hosting\IHostedService.cs" />
-    <Compile Include="Hosting\Internal\Host.cs" />
+    <Compile Include="Hosting\Internal.Host.cs" />
     <Compile Include="Hosting\ProviderAction.cs" />
     <Compile Include="Hosting\ServiceCollectionHostedServiceExtensions.cs" />
     <Compile Include="Hosting\ServiceAction.cs" />

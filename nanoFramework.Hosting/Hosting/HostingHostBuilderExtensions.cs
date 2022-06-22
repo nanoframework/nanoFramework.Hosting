@@ -22,11 +22,11 @@ namespace nanoFramework.Hosting
         /// Specify the <see cref="IServiceProvider"/> to be the default one.
         /// </summary>
         /// <param name="hostBuilder">The <see cref="IHostBuilder"/> to configure.</param>
-        /// <param name="configure"></param>
-        /// <returns>The <see cref="IHostBuilder"/>.</returns>
-        public static IHostBuilder UseDefaultServiceProvider(this IHostBuilder hostBuilder, ProviderAction configure)
+        /// <param name="configureDelegate">The delegate for configuring the <see cref="ServiceProviderOptions"/>.</param>
+        /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
+        public static IHostBuilder UseDefaultServiceProvider(this IHostBuilder hostBuilder, ProviderAction configureDelegate)
         { 
-            return hostBuilder.UseDefaultServiceProvider((context, options) => configure(options));
+            return hostBuilder.UseDefaultServiceProvider((context, options) => configureDelegate(options));
         }
     }
 }

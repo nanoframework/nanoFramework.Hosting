@@ -9,6 +9,6 @@ namespace nanoFramework.Hosting
     /// Represents a function that can process a request.
     /// </summary>
     /// <param name="context">The context for the request.</param>
-    /// <param name="configure">The delegate that configures the <see cref="IServiceProvider"/>.</param>
+    /// <param name="configure">The delegate that configures the <see cref="ServiceProviderOptions"/>.</param>
     public delegate void ProviderContextDelegate(HostBuilderContext context, ServiceProviderOptions configure);
 }
