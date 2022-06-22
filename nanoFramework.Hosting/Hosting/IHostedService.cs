@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace nanoFramework.Hosting
 {
@@ -10,11 +11,11 @@ namespace nanoFramework.Hosting
         /// <summary>
         /// Triggered when the application host is ready to start the service.
         /// </summary>
-        Thread Start();
+        void StartAsync();
 
         /// <summary>
         /// Triggered when the application host is performing a graceful shutdown.
         /// </summary>
-        void Stop(int timeout = 1000);
+        void StopAsync();
     }
 }

@@ -1,45 +1,45 @@
-﻿using System;
-using System.Device.Gpio;
-using System.Threading;
+﻿//using System;
+//using System.Device.Gpio;
+//using System.Threading;
 
-using nanoFramework.Hosting;
+//using nanoFramework.Hosting;
 
-using Microsoft.Extensions.Logging;
+//using Microsoft.Extensions.Logging;
 
-namespace Hosting
-{
-    internal class Led3HostedService : BackgroundService
-    {
-        private readonly ILogger _logger;
-        private readonly IHardwareService _hardware;
+//namespace Hosting
+//{
+//    internal class Led3HostedService : BackgroundService
+//    {
+//        private readonly ILogger _logger;
+//        private readonly IHardwareService _hardware;
 
-        public Led3HostedService(ILoggerFactory loggerFactory, IHardwareService hardware)
-        {
-            _logger = loggerFactory.CreateLogger(nameof(Led3HostedService));
-            _hardware = hardware;
-        }
+//        public Led3HostedService(ILoggerFactory loggerFactory, IHardwareService hardware)
+//        {
+//            _logger = loggerFactory.CreateLogger(nameof(Led3HostedService));
+//            _hardware = hardware;
+//        }
 
-        protected override void ExecuteAsync()
-        {
-            var ledPin = 30; //LD3;
+//        protected override void ExecuteAsync()
+//        {
+//            var ledPin = 30; //LD3;
 
-            GpioPin led = _hardware.GpioController.OpenPin(ledPin, PinMode.Output);
-            led.Write(PinValue.Low);
+//            GpioPin led = _hardware.GpioController.OpenPin(ledPin, PinMode.Output);
+//            led.Write(PinValue.Low);
 
-            _logger.LogInformation($"Started blinking led 3 on pin {ledPin}.");
+//            _logger.LogInformation($"Started blinking led 3 on pin {ledPin}.");
 
-            while (true)
-            {
-                led.Write(PinValue.High);
-                _logger.LogInformation("Led 3 status: on");
+//            while (true)
+//            {
+//                led.Write(PinValue.High);
+//                _logger.LogInformation("Led 3 status: on");
 
-                Thread.Sleep(300);
+//                Thread.Sleep(300);
 
-                led.Write(PinValue.Low);
-                _logger.LogInformation("Led 3 status: off");
+//                led.Write(PinValue.Low);
+//                _logger.LogInformation("Led 3 status: off");
                 
-                Thread.Sleep(300);
-            }
-        }
-    }
-}
+//                Thread.Sleep(300);
+//            }
+//        }
+//    }
+//}

@@ -1,5 +1,9 @@
 using nanoFramework.Hosting;
+using nanoFramework.Logging.Debug;
 using nanoFramework.DependencyInjection;
+
+using Microsoft.Extensions.Logging;
+using System.Threading;
 
 namespace Hosting
 {
@@ -8,13 +12,27 @@ namespace Hosting
         public static void Main()
         {
             var hostBuilder = Host.CreateDefaultBuilder()
-            .ConfigureServices((context, services) =>
-            {
-                services.AddSingleton(typeof(IHardwareService), typeof(HardwareService));
-                services.AddHostedService(typeof(Led1HostedService));
-                services.AddHostedService(typeof(Led2HostedService));
-                services.AddHostedService(typeof(Led3HostedService));
-            }).Build();
+                .UseDefaultServiceProvider(options =>
+                {
+                    options.ValidateOnBuild = true;
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton(typeof(ILoggerFactory), typeof(DebugLoggerFactory));
+                    services.AddHostedService(typeof(TestBackgroundService));
+                }).Build();
+            
+            hostBuilder.Start();
+
+            Thread.Sleep(5000);
+            
+            hostBuilder.Stop();
+
+            Thread.Sleep(5000);
+
+            hostBuilder.Dispose();
+
+            Thread.Sleep(5000);
 
             hostBuilder.Run();
         }

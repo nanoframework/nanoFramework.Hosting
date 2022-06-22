@@ -1,9 +1,9 @@
-﻿using System.Device.Gpio;
+﻿//using System.Device.Gpio;
 
-namespace Hosting
-{
-    public interface IHardwareService
-    {
-        GpioController GpioController { get; }
-    }
-}
+//namespace Hosting
+//{
+//    public interface IHardwareService
+//    {
+//        GpioController GpioController { get; }
+//    }
+//}

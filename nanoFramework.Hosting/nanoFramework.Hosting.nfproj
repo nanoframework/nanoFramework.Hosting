@@ -24,24 +24,23 @@
     <Compile Include="Hosting\HostBuilderContext.cs" />
     <Compile Include="Hosting\HostingAbstractionsHostExtensions.cs" />
     <Compile Include="Hosting\HostingHostBuilderExtensions.cs" />
-    <Compile Include="Hosting\Internal\HostingLoggerExtensions.cs" />
     <Compile Include="Hosting\IHost.cs" />
     <Compile Include="Hosting\IHostBuilder.cs" />
     <Compile Include="Hosting\IHostedService.cs" />
     <Compile Include="Hosting\Internal\Host.cs" />
+    <Compile Include="Hosting\ProviderAction.cs" />
     <Compile Include="Hosting\ServiceCollectionHostedServiceExtensions.cs" />
     <Compile Include="Hosting\ServiceAction.cs" />
+    <Compile Include="Hosting\ProviderContextDelegate.cs" />
     <Compile Include="Hosting\ServiceContextDelegate.cs" />
-    <Compile Include="Hosting\Internal\LoggerEventIds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Hosting\ServiceDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.12.0\lib\mscorlib.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Logging">
-      <HintPath>..\packages\nanoFramework.Logging.1.0.1.29\lib\nanoFramework.Logging.dll</HintPath>
+    <Reference Include="System.Threading">
+      <HintPath>..\packages\nanoFramework.System.Threading.1.0.4\lib\System.Threading.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

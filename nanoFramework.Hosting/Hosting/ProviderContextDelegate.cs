@@ -8,6 +8,7 @@ namespace nanoFramework.Hosting
     /// <summary>
     /// Represents a function that can process a request.
     /// </summary>
-    /// <param name="serviceCollection">Specifies the contract for a collection of service descriptors.</param>
-    public delegate void ServiceAction(IServiceCollection serviceCollection);
+    /// <param name="context">The context for the request.</param>
+    /// <param name="configure">The delegate that configures the <see cref="IServiceProvider"/>.</param>
+    public delegate void ProviderContextDelegate(HostBuilderContext context, ServiceProviderOptions configure);
 }

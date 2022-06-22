@@ -1,25 +1,12 @@
-﻿namespace nanoFramework.Hosting
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System.Threading;
+
+namespace nanoFramework.Hosting
 {
     public static class HostingAbstractionsHostExtensions
     {
-        /// <summary>
-        /// Starts the host synchronously.
-        /// </summary>
-        /// <param name="host">The <see cref="IHost"/> to start.</param>
-        public static void Start(this IHost host)
-        {
-            host.Start();
-        }
-
-        /// <summary>
-        /// Attempts to gracefully stop the host with the given timeout.
-        /// </summary>
-        /// <param name="host">The <see cref="IHost"/> to stop.</param>
-        public static void Stop(this IHost host)
-        {
-            host.Stop();
-        }
-
         /// <summary>
         /// Runs an application and block the calling thread until host shutdown.
         /// </summary>
@@ -27,6 +14,7 @@
         public static void Run(this IHost host)
         {
             host.Start();
+            Thread.Sleep(Timeout.Infinite);
         }
     }
 }

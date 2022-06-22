@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System;
 
 namespace nanoFramework.Hosting
 {
@@ -10,7 +13,7 @@ namespace nanoFramework.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="HostBuilderContext"/> class.
         /// </summary>
-        public HostBuilderContext(string[] properties)
+        public HostBuilderContext(object[] properties)
         {
             Properties = properties ?? throw new ArgumentNullException(nameof(properties));
         }
@@ -18,6 +21,6 @@ namespace nanoFramework.Hosting
         /// <summary>
         /// A central location for sharing state between components during the host building process.
         /// </summary>
-        public string[] Properties { get; }
+        public object[] Properties { get; }
     }
 }

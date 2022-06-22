@@ -1,10 +1,10 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System;
 using System.Collections;
 
-using nanoFramework.Logging.Debug;
 using nanoFramework.DependencyInjection;
-
-using Microsoft.Extensions.Logging;
 
 namespace nanoFramework.Hosting
 {
@@ -12,35 +12,33 @@ namespace nanoFramework.Hosting
     {
         private bool _hostBuilt;
         private IServiceProvider _appServices;
+        private ServiceProviderOptions _providerOptions = new ServiceProviderOptions() ;
         private HostBuilderContext _hostBuilderContext;
         private readonly ArrayList _configureServicesActions = new ArrayList();
 
-        /// <summary>
-        /// A central location for sharing state between components during the host building process.
-        /// </summary>
-        public string[] Properties { get; } = new string[0];
+        /// <inheritdoc />
+        public object[] Properties { get; } = new object[0];
 
-        /// <summary>
-        /// Adds services to the container. This can be called multiple times and the results will be additive.
-        /// </summary>
-        /// <param name="configureDelegate">The delegate for configuring the <see cref="IConfigurationBuilder"/> that will be used
-        /// to construct the <see cref="IConfiguration"/> for the host.</param>
-        /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
+        /// <inheritdoc />
         public IHostBuilder ConfigureServices(ServiceContextDelegate configureDelegate)
         {
             _configureServicesActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
             return this;
         }
 
-        /// <summary>
-        /// Run the given actions to initialize the host. This can only be called once.
-        /// </summary>
-        /// <returns>An initialized <see cref="IHost"/></returns>
+        /// <inheritdoc />
+        public IHostBuilder UseDefaultServiceProvider(ProviderContextDelegate configureDelegate)
+        {
+            configureDelegate(_hostBuilderContext, _providerOptions);
+            return this;
+        }
+
+        /// <inheritdoc />
         public IHost Build()
         {
             if (_hostBuilt)
             {
-                throw new InvalidOperationException("Build can only be called once");
+                throw new InvalidOperationException("Build can only be called once.");
             }
             _hostBuilt = true;
 
@@ -52,14 +50,13 @@ namespace nanoFramework.Hosting
 
             services.AddSingleton(typeof(IHost), typeof(Internal.Host));
             services.AddSingleton(typeof(IHostBuilder), _hostBuilderContext);
-            services.AddSingleton(typeof(ILoggerFactory), typeof(DebugLoggerFactory));
 
             foreach (ServiceContextDelegate configureServicesAction in _configureServicesActions)
             {
                 configureServicesAction(_hostBuilderContext, services);
             }
 
-            _appServices = services.BuildServiceProvider();
+            _appServices = services.BuildServiceProvider(_providerOptions);
             if (_appServices == null)
             {
                 throw new InvalidOperationException($"The BuildServiceProvider returned a null ServiceProvider.");
