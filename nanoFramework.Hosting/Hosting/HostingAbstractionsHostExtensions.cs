@@ -8,12 +8,12 @@ namespace nanoFramework.Hosting
     public static class HostingAbstractionsHostExtensions
     {
         /// <summary>
-        /// Runs an application and block the calling thread until host shutdown.
+        /// Runs an application and block the calling thread.
         /// </summary>
         /// <param name="host">The <see cref="IHost"/> to run.</param>
         public static void Run(this IHost host)
         {
-            host.Start();
+            host.Start();        
             Thread.Sleep(Timeout.Infinite);
         }
     }

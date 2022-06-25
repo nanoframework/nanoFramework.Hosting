@@ -23,7 +23,7 @@ namespace Hosting
             while (!cancellationToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Attempting to do actions.");
-                Thread.Sleep(100);
+                Thread.Sleep(500);
             }
         }
     }
