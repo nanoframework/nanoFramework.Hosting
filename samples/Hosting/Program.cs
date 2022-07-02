@@ -38,12 +38,12 @@ namespace Hosting
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton(typeof(BackgroundQueue));
-                    services.AddSingleton(typeof(IHardwareService), typeof(HardwareService));
-                    services.AddSingleton(typeof(ILoggerFactory), typeof(DebugLoggerFactory));
+                    //services.AddSingleton(typeof(IHardwareService), typeof(HardwareService));
+                    //services.AddSingleton(typeof(ILoggerFactory), typeof(DebugLoggerFactory));
                     services.AddHostedService(typeof(PublisherService));
                     services.AddHostedService(typeof(SubscriberService));
                     services.AddHostedService(typeof(QueueMonitorService));
-                    services.AddHostedService(typeof(Led1HostedService));
+                    //services.AddHostedService(typeof(Led1HostedService));
                 });
     }
 }

@@ -1,5 +1,7 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
 
 using System;
 
@@ -37,6 +39,8 @@ namespace nanoFramework.Hosting
         /// Run the given actions to initialize the host. This can only be called once.
         /// </summary>
         /// <returns>An initialized <see cref="IHost"/>.</returns>
+        /// <exception cref="InvalidOperationException">The <see cref="BuildServiceProvider"/> returned a <see langword="null"/> ServiceProvider.</exception>
+        /// <exception cref="InvalidOperationException">"Build can only be called once."</exception>
         IHost Build();
     }
 }

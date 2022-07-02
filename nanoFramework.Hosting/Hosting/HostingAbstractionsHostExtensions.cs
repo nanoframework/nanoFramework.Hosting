@@ -1,10 +1,17 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
 
+using System;
 using System.Threading;
 
 namespace nanoFramework.Hosting
 {
+
+    /// <summary>
+    /// Extensions for <see cref="IHost"/>.
+    /// </summary>
     public static class HostingAbstractionsHostExtensions
     {
         /// <summary>
@@ -13,7 +20,13 @@ namespace nanoFramework.Hosting
         /// <param name="host">The <see cref="IHost"/> to run.</param>
         public static void Run(this IHost host)
         {
-            host.Start();        
+            if (host == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            host.Start();       
+            
             Thread.Sleep(Timeout.Infinite);
         }
     }

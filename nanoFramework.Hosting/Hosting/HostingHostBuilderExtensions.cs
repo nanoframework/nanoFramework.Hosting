@@ -1,10 +1,16 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
 
 using nanoFramework.DependencyInjection;
+using System;
 
 namespace nanoFramework.Hosting
 {
+    /// <summary>
+    /// Extensions for <see cref="IHostBuilder"/>.
+    /// </summary>
     public static class HostingHostBuilderExtensions
     {
         /// <summary>
@@ -15,6 +21,11 @@ namespace nanoFramework.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public static IHostBuilder ConfigureServices(this IHostBuilder hostBuilder, ServiceAction configureDelegate)
         {
+            if (hostBuilder == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             return hostBuilder.ConfigureServices((context, collection) => configureDelegate(collection));
         }
 
@@ -25,7 +36,12 @@ namespace nanoFramework.Hosting
         /// <param name="configureDelegate">The delegate for configuring the <see cref="ServiceProviderOptions"/>.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public static IHostBuilder UseDefaultServiceProvider(this IHostBuilder hostBuilder, ProviderAction configureDelegate)
-        { 
+        {
+            if (hostBuilder == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             return hostBuilder.UseDefaultServiceProvider((context, options) => configureDelegate(options));
         }
     }

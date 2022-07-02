@@ -1,5 +1,7 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
 
 using System;
 using System.Collections;
@@ -8,6 +10,9 @@ using nanoFramework.DependencyInjection;
 
 namespace nanoFramework.Hosting
 {
+    /// <summary>
+    /// Default implementation of <see cref="IHostBuilder"/>.
+    /// </summary>
     public class HostBuilder : IHostBuilder
     {
         private bool _hostBuilt;
@@ -23,7 +28,13 @@ namespace nanoFramework.Hosting
         /// <inheritdoc />
         public IHostBuilder ConfigureServices(ServiceContextDelegate configureDelegate)
         {
-            _configureServicesActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
+            if (configureDelegate == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            _configureServicesActions.Add(configureDelegate);
+
             return this;
         }
 
@@ -40,7 +51,7 @@ namespace nanoFramework.Hosting
         {
             if (_hostBuilt)
             {
-                throw new InvalidOperationException("Build can only be called once.");
+                throw new InvalidOperationException();
             }
             _hostBuilt = true;
 
@@ -69,7 +80,7 @@ namespace nanoFramework.Hosting
 
             if (_appServices == null)
             {
-                throw new InvalidOperationException($"The BuildServiceProvider returned a null ServiceProvider.");
+                throw new InvalidOperationException();
             }
 
             return (Internal.Host)_appServices.GetRequiredService(typeof(IHost));

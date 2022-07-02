@@ -1,5 +1,7 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
 
 using System;
 
@@ -7,6 +9,9 @@ using nanoFramework.DependencyInjection;
 
 namespace nanoFramework.Hosting
 {
+    /// <summary>
+    /// Extensions for <see cref="IServiceCollection"/>.
+    /// </summary>
     public static class ServiceCollectionHostedServiceExtensions
     {
         /// <summary>
@@ -17,9 +22,12 @@ namespace nanoFramework.Hosting
         /// <returns>The original <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddHostedService(this IServiceCollection services, Type implementationType)
         {
-            services.AddSingleton(typeof(IHostedService), implementationType);
+            if (services == null)
+            {
+                throw new ArgumentNullException();
+            }
 
-            return services;
+            return services.AddSingleton(typeof(IHostedService), implementationType);
         }
     }
 }
