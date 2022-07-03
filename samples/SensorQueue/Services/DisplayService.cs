@@ -11,19 +11,19 @@ using nanoFramework.Hosting;
 
 namespace Hosting
 {
-    internal class SubscriberService : BackgroundService
+    internal class DisplayService : BackgroundService
     {
         private readonly BackgroundQueue _queue;
 
-        public SubscriberService(BackgroundQueue queue)
+        public DisplayService(BackgroundQueue queue)
         {
             _queue = queue;
         }
 
         protected override void ExecuteAsync(CancellationToken cancellationToken)
         {
-            Debug.WriteLine($"Service '{nameof(SubscriberService)}' is now running in the background.");
-            cancellationToken.Register(() => Debug.WriteLine($"Service '{nameof(SubscriberService)}' is stopping."));
+            Debug.WriteLine($"Service '{nameof(DisplayService)}' is now running in the background.");
+            cancellationToken.Register(() => Debug.WriteLine($"Service '{nameof(DisplayService)}' is stopping."));
 
             while (!cancellationToken.IsCancellationRequested)
             {

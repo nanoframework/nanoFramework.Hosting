@@ -6,7 +6,6 @@ using System.Diagnostics;
 using nanoFramework.Hosting;
 using nanoFramework.DependencyInjection;
 
-
 namespace Hosting
 {
     public class Program

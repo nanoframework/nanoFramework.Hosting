@@ -11,18 +11,18 @@ namespace Hosting
     public class Program
     {
         public static void Main()
-        { 
-            CreateHostBuilder().Build().Run();
+        {
+            var hostBuilder = CreateHostBuilder();
+            var host = hostBuilder.Build();
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton(typeof(BackgroundQueue));
-                    services.AddHostedService(typeof(PublisherService));
-                    services.AddHostedService(typeof(SubscriberService));
-                    services.AddHostedService(typeof(QueueMonitorService));
+                    services.AddSingleton(typeof(IHardwareService), typeof(HardwareService));
+                    services.AddHostedService(typeof(LedService));
                 });
     }
 }

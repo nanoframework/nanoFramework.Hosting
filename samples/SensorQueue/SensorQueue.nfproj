@@ -18,22 +18,22 @@
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
-    <Compile Include="Services\PublisherService.cs" />
+    <Compile Include="Services\SensorService.cs" />
     <Compile Include="Services\BackgroundQueue.cs" />
-    <Compile Include="Services\SubscriberService.cs" />
-    <Compile Include="Services\QueueMonitorService.cs" />
+    <Compile Include="Services\DisplayService.cs" />
+    <Compile Include="Services\MonitorService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib">
-      <HintPath>..\packages\nanoFramework.CoreLibrary.1.12.0\lib\mscorlib.dll</HintPath>
+      <HintPath>packages\nanoFramework.CoreLibrary.1.12.0\lib\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.System.Collections">
       <HintPath>packages\nanoFramework.System.Collections.1.4.0\lib\nanoFramework.System.Collections.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading">
-      <HintPath>..\..\packages\nanoFramework.System.Threading.1.0.4\lib\System.Threading.dll</HintPath>
+      <HintPath>packages\nanoFramework.System.Threading.1.0.4\lib\System.Threading.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

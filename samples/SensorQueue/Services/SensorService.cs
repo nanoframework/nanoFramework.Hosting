@@ -1,4 +1,9 @@
-﻿using System;
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
+
+using System;
 using System.Threading;
 using System.Diagnostics;
 
@@ -6,12 +11,12 @@ using nanoFramework.Hosting;
 
 namespace Hosting
 {
-    internal class PublisherService : BackgroundService
+    internal class SensorService : BackgroundService
     {
         private readonly Random _random;
         private readonly BackgroundQueue _queue;
 
-        public PublisherService(BackgroundQueue queue)
+        public SensorService(BackgroundQueue queue)
         {
             _queue = queue;
             _random = new Random();
@@ -19,8 +24,8 @@ namespace Hosting
 
         protected override void ExecuteAsync(CancellationToken cancellationToken)
         {
-            Debug.WriteLine($"Service '{nameof(PublisherService)}' is now running in the background.");
-            cancellationToken.Register(() => Debug.WriteLine($"Service '{nameof(PublisherService)}' is stopping."));
+            Debug.WriteLine($"Service '{nameof(SensorService)}' is now running in the background.");
+            cancellationToken.Register(() => Debug.WriteLine($"Service '{nameof(SensorService)}' is stopping."));
 
             while (!cancellationToken.IsCancellationRequested)
             {

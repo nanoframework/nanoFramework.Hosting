@@ -10,11 +10,11 @@ using nanoFramework.Hosting;
 
 namespace Hosting
 {
-    internal class QueueMonitorService : SchedulerService
+    internal class MonitorService : SchedulerService
     {
         private readonly BackgroundQueue _queue;
 
-        public QueueMonitorService(BackgroundQueue queue)
+        public MonitorService(BackgroundQueue queue)
             : base(TimeSpan.FromSeconds(1))
         {
             _queue = queue;
@@ -22,7 +22,7 @@ namespace Hosting
 
         public override void StartAsync()
         {
-            Debug.WriteLine($"Service '{nameof(QueueMonitorService)}' is now running in the background.");
+            Debug.WriteLine($"Service '{nameof(MonitorService)}' is now running in the background.");
 
             base.StartAsync();
         }
@@ -34,7 +34,7 @@ namespace Hosting
 
         public override void StopAsync()
         {
-            Debug.WriteLine($"Service '{nameof(QueueMonitorService)}' is stopping.");
+            Debug.WriteLine($"Service '{nameof(MonitorService)}' is stopping.");
             
             base.StopAsync();
         }

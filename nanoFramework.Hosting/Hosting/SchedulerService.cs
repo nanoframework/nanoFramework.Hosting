@@ -66,7 +66,7 @@ namespace nanoFramework.Hosting
             _executeTimer = new Timer(state =>
             {
                 ExecuteAsync(state);
-            }, this, _time, _interval);
+            }, _executeTimer, _time, _interval);
         }
 
         /// <inheritdoc />

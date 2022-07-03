@@ -1,20 +1,20 @@
-﻿using System;
-using System.Threading;
-using System.Device.Gpio;
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
 
-using Microsoft.Extensions.Logging;
+using System;
+using System.Device.Gpio;
 
 namespace Hosting
 {
     internal class HardwareService : IHardwareService, IDisposable
     {
-        private readonly ILogger _logger;
         private readonly GpioController _gpioController;
 
-        public HardwareService(ILoggerFactory loggerFactory)
+        public HardwareService()
         {
             _gpioController = new GpioController();
-            _logger = loggerFactory.CreateLogger(nameof(HardwareService));
         }
 
         public GpioController GpioController { get { return _gpioController; } }

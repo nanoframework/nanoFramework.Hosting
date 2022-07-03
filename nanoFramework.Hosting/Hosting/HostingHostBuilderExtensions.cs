@@ -3,8 +3,8 @@
 // See LICENSE file in the project root for full license information.
 //
 
-using nanoFramework.DependencyInjection;
 using System;
+using nanoFramework.DependencyInjection;
 
 namespace nanoFramework.Hosting
 {
