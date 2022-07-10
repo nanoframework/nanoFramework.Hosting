@@ -32,7 +32,7 @@ namespace nanoFramework.Hosting
 
             if (Debugger.IsAttached)
             {
-                // enables validation as default when debugger is attached   
+                // enables di validation as default when debugger is attached   
                 _providerOptions = new ServiceProviderOptions()
                 {
                     ValidateOnBuild = true

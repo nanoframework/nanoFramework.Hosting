@@ -5,7 +5,7 @@
 -----
 
 # Welcome to the .NET nanoFramework Generic Host Library repository
-The .NET nanoFramework Generic Host provides convenience methods for creating [dependency injection (DI)](https://github.com/nanoframework/nanoFramework.DependencyInjection/tree/main) hosted application container services with preconfigured defaults.
+The .NET nanoFramework Generic Host provides convenience methods for creating [dependency injection (DI)](https://github.com/nanoframework/nanoFramework.DependencyInjection/tree/main) application containers with preconfigured defaults.
 
 ## Build status
 
@@ -19,10 +19,8 @@ The .NET nanoFramework Generic Host provides convenience methods for creating [d
 
 [Hosting Unit Tests](https://github.com/nanoframework/nanoFramework.Hosting/tree/main/tests)
 
-## What is a Generic Host
-The Generic Host sets up a default DI application container as well as provides a few services in the DI container which handle the the application lifetime.
-
-When a host starts it calls *Start()* on each implementation of IHostedService registered in the service container's collection of hosted services. In the application container all IHostedService implementations that contain BackgroundService or SchedulerService instances have their *ExecuteAsync* methods called.
+## Generic Host
+A Generic Host configures a DI application container as well as provides services in the DI container which handle the the application lifetime. When a host starts it calls *Start* on each implementation of IHostedService registered in the service container's collection of hosted services. In the application container all IHostedService object that inherent BackgroundService or SchedulerService have their *ExecuteAsync* methods called.
 
 This API mirrors as close as possible the official .NET 
 [Generic Host](https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host).
@@ -56,7 +54,7 @@ namespace Hosting
 
 ## BackgroundService base class
 
-Is a base class for implementing a long running IHostedService. The method *ExecuteAsync* is called asynchronously to run the background service. Your implementation of *ExecuteAsync* should finish promptly when the *CancellationRequested* is fired in order to gracefully shut down the service.
+Provides a base class for implementing a long running IHostedService. The method *ExecuteAsync* is called asynchronously to run the background service. Your implementation of *ExecuteAsync* should finish promptly when the *CancellationRequested* is fired in order to gracefully shut down the service.
 
 ```csharp
 public class SensorService : BackgroundService
@@ -74,7 +72,7 @@ public class SensorService : BackgroundService
 ```
 
 ## SchedulerService base class
-A timed background task makes use of the [Timer](https://docs.nanoframework.net/api/System.Threading.Timer.html) class. The timer triggers at specified interval the 'ExecuteAsync' method. The timer is disabled on Stop and disposed when the service container is disposed.
+ Provides a base class to schedule a thread making use of the [Timer](https://docs.nanoframework.net/api/System.Threading.Timer.html) running IHostedServce. The timer triggers at a specified time and interval the 'ExecuteAsync' method. The timer is disabled on Stop and disposed when the service container is disposed.
 
 ```csharp
 public class DisplayService : SchedulerService

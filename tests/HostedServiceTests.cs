@@ -3,7 +3,6 @@ using System;
 using nanoFramework.TestFramework;
 using nanoFramework.Hosting.UnitTests.Fakes;
 
-
 namespace nanoFramework.Hosting.UnitTests
 {
     [TestClass]

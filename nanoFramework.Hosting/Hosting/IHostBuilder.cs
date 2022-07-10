@@ -39,7 +39,6 @@ namespace nanoFramework.Hosting
         /// Run the given actions to initialize the host. This can only be called once.
         /// </summary>
         /// <returns>An initialized <see cref="IHost"/>.</returns>
-        /// <exception cref="InvalidOperationException">The <see cref="BuildServiceProvider"/> returned a <see langword="null"/> ServiceProvider.</exception>
         /// <exception cref="InvalidOperationException">"Build can only be called once."</exception>
         IHost Build();
     }

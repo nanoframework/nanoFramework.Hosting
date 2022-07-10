@@ -16,7 +16,7 @@ namespace nanoFramework.Hosting.UnitTests
         }
 
         [TestMethod]
-        public void StopWithoutCancellation()
+        public void StartStopHostBuilder()
         {
             var builder = new HostBuilder();
             using (var host = builder.Build())
@@ -29,8 +29,7 @@ namespace nanoFramework.Hosting.UnitTests
         [TestMethod]
         public void DefaultServicesAreAvailable()
         {
-            using (var host = new HostBuilder()
-                   .Build())
+            using (var host = new HostBuilder().Build())
             {
                 Assert.NotNull(host.Services.GetRequiredService(typeof(IHost)));
                 Assert.NotNull(host.Services.GetRequiredService(typeof(IHostBuilder)));

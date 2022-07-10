@@ -10,10 +10,16 @@ using nanoFramework.DependencyInjection;
 
 namespace nanoFramework.Hosting.Internal
 {
+    /// <summary>
+    /// Default implementation of <see cref="IHost"/>.
+    /// </summary>
     internal class Host : IHost, IDisposable
     {
         private object[] _hostedServices;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="Host"/>.
+        /// </summary>
         public Host(IServiceProvider services)
         {
             if (services == null)
@@ -54,7 +60,7 @@ namespace nanoFramework.Hosting.Internal
 
             if (exceptions != null)
             {
-                throw new AggregateException("One or more hosted services failed to start.", exceptions);
+                throw new AggregateException(string.Empty, exceptions);
             }
         }
 
@@ -82,7 +88,7 @@ namespace nanoFramework.Hosting.Internal
 
             if (exceptions != null)
             {
-                throw new AggregateException("One or more hosted services failed to stop.", exceptions); ;
+                throw new AggregateException(string.Empty, exceptions); ;
             }
         }
 
