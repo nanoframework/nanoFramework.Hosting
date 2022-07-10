@@ -61,7 +61,7 @@ namespace nanoFramework.Hosting
         protected abstract void ExecuteAsync(object state);
 
         /// <inheritdoc />
-        public virtual void StartAsync()
+        public virtual void Start()
         {
             _executeTimer = new Timer(state =>
             {
@@ -70,7 +70,7 @@ namespace nanoFramework.Hosting
         }
 
         /// <inheritdoc />
-        public virtual void StopAsync()
+        public virtual void Stop()
         {
             if (_executeTimer == null)
             {

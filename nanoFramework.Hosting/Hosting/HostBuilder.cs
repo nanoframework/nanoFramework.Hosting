@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics;
 
 using nanoFramework.DependencyInjection;
 
@@ -18,12 +19,33 @@ namespace nanoFramework.Hosting
         private bool _hostBuilt;
         private IServiceProvider _appServices;
         private HostBuilderContext _hostBuilderContext;
-        private ServiceProviderOptions _providerOptions;
 
-        private readonly ArrayList _configureServicesActions = new ArrayList();
+        private readonly ServiceProviderOptions _providerOptions;
+        private readonly ArrayList _configureServicesActions;
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="HostBuilder"/>.
+        /// </summary>
+        public HostBuilder()
+        {
+            _configureServicesActions = new ArrayList();
+
+            if (Debugger.IsAttached)
+            {
+                // enables validation as default when debugger is attached   
+                _providerOptions = new ServiceProviderOptions()
+                {
+                    ValidateOnBuild = true
+                };
+            }
+            else
+            {
+                _providerOptions = new ServiceProviderOptions();
+            }
+        }
 
         /// <inheritdoc />
-        public object[] Properties { get; } = new object[0];
+        public object[] Properties { get; set; } = new object[0];
 
         /// <inheritdoc />
         public IHostBuilder ConfigureServices(ServiceContextDelegate configureDelegate)
@@ -41,8 +63,8 @@ namespace nanoFramework.Hosting
         /// <inheritdoc />
         public IHostBuilder UseDefaultServiceProvider(ProviderContextDelegate configureDelegate)
         {
-            _providerOptions = new ServiceProviderOptions();
             configureDelegate(_hostBuilderContext, _providerOptions);
+            
             return this;
         }
 
@@ -69,14 +91,7 @@ namespace nanoFramework.Hosting
                 configureServicesAction(_hostBuilderContext, services);
             }
 
-            if (_providerOptions == null)
-            {
-                _appServices = services.BuildServiceProvider();
-            }
-            else
-            {
-                _appServices = services.BuildServiceProvider(_providerOptions);
-            }
+            _appServices = services.BuildServiceProvider(_providerOptions);
 
             if (_appServices == null)
             {

@@ -14,7 +14,11 @@ namespace nanoFramework.Hosting
     public abstract class BackgroundService : IHostedService, IDisposable
     {
         private Thread _executeThread;
-        private CancellationTokenSource _stoppingCts;
+
+        /// <summary>
+        /// Gets whether cancellation has been requested for this service.
+        /// </summary>
+        protected bool CancellationRequested { get; private set; } = false;
 
         /// <summary>
         /// Gets the <see cref="Thread"/> that executes the background operation.
@@ -28,45 +32,35 @@ namespace nanoFramework.Hosting
         /// This method is called when the <see cref="IHostedService"/> starts. The implementation should return a thread that represents
         /// the lifetime of the long running operation(s) being performed.
         /// </summary>
-        protected abstract void ExecuteAsync(CancellationToken stoppingToken);
+        protected abstract void ExecuteAsync();
 
         /// <inheritdoc />
-        public virtual void StartAsync()
+        public virtual void Start()
         {
-            _stoppingCts = new CancellationTokenSource();
-
             // Store the thread we're executing
             _executeThread = new Thread(() =>
             {
-                ExecuteAsync(_stoppingCts.Token);
+                ExecuteAsync();
             });
         }
 
         /// <inheritdoc />
-        public virtual void StopAsync()
+        public virtual void Stop()
         {
             if (_executeThread == null)
             {
                 return;
             }
 
-            try
-            {
-                // Signal cancellation to the executing method
-                _stoppingCts!.Cancel();
-            }
-            finally
-            {
-                // Wait for thread to exit
-                _executeThread.Join();
-                _executeThread = null;
-            }
+            // Signal cancellation to the executing method
+            CancellationRequested = true;
+
+            // Wait for thread to exit
+            _executeThread.Join();
+            _executeThread = null;
         }
 
         /// <inheritdoc />
-        public virtual void Dispose()
-        {
-            _stoppingCts?.Dispose();
-        }
+        public virtual void Dispose() { }
     }
 }

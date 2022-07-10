@@ -4,6 +4,7 @@
 //
 
 using System;
+
 using nanoFramework.DependencyInjection;
 
 namespace nanoFramework.Hosting

@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "nanoFramework.Hosting", "nanoFramework.Hosting\nanoFramework.Hosting.nfproj", "{AEEA2C38-FF56-4ACD-9DF5-E0BEA2D1263A}"
 EndProject
-Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "nanoFramework.DependencyInjection", "..\nanoFramework.DependencyInjection\nanoFramework.DependencyInjection\nanoFramework.DependencyInjection.nfproj", "{A2B2222C-0553-4877-8CF1-4458B30C0081}"
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "nanoFramework.Hosting.UnitTests", "tests\nanoFramework.Hosting.UnitTests.nfproj", "{450AF2B8-2C40-4C3D-BEE3-091F01BD97F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,12 +24,12 @@ Global
 		{AEEA2C38-FF56-4ACD-9DF5-E0BEA2D1263A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEEA2C38-FF56-4ACD-9DF5-E0BEA2D1263A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AEEA2C38-FF56-4ACD-9DF5-E0BEA2D1263A}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{A2B2222C-0553-4877-8CF1-4458B30C0081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2B2222C-0553-4877-8CF1-4458B30C0081}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2B2222C-0553-4877-8CF1-4458B30C0081}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A2B2222C-0553-4877-8CF1-4458B30C0081}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2B2222C-0553-4877-8CF1-4458B30C0081}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2B2222C-0553-4877-8CF1-4458B30C0081}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{450AF2B8-2C40-4C3D-BEE3-091F01BD97F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450AF2B8-2C40-4C3D-BEE3-091F01BD97F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450AF2B8-2C40-4C3D-BEE3-091F01BD97F1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{450AF2B8-2C40-4C3D-BEE3-091F01BD97F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450AF2B8-2C40-4C3D-BEE3-091F01BD97F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450AF2B8-2C40-4C3D-BEE3-091F01BD97F1}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

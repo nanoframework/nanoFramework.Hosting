@@ -17,7 +17,7 @@ namespace nanoFramework.Hosting
         /// <summary>
         /// A central location for sharing state between components during the host building process.
         /// </summary>
-        object[] Properties { get; }
+        object[] Properties { get; set; }
 
         /// <summary>
         /// Adds services to the container. This can be called multiple times and the results will be additive.

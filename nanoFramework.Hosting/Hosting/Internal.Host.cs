@@ -38,7 +38,7 @@ namespace nanoFramework.Hosting.Internal
                 try
                 {
                     // TODO: Thead exceptions are not passed back to main thread. What to do?
-                    hostedService.StartAsync();
+                    hostedService.Start();
 
                     if (hostedService is BackgroundService backgroundService)
                     {
@@ -61,12 +61,17 @@ namespace nanoFramework.Hosting.Internal
         /// <inheritdoc />
         public void Stop()
         {
+            if (_hostedServices == null)
+            {
+                return;
+            }
+            
             ArrayList exceptions = null;
             foreach (IHostedService hostedService in _hostedServices)
             {
                 try
                 {
-                    hostedService.StopAsync();
+                    hostedService.Stop();
                 }
                 catch (Exception ex)
                 {
