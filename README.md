@@ -1,9 +1,11 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nanoframework_nanoFramework.Hosting&metric=alert_status)](https://sonarcloud.io/dashboard?id=nanoframework_nanoFramework.Hosting) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=nanoframework_nanoFramework.Hosting&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=nanoframework_nanoFramework.Hosting) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![NuGet](https://img.shields.io/nuget/dt/nanoFramework.Hosting.svg?label=NuGet&style=flat&logo=nuget)](https://www.nuget.org/packages/nanoFramework.Hosting/) [![#yourfirstpr](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://github.com/nanoframework/Home/blob/main/CONTRIBUTING.md) [![Discord](https://img.shields.io/discord/478725473862549535.svg?logo=discord&logoColor=white&label=Discord&color=7289DA)](https://discord.gg/gCyBu8T)
+
 ![nanoFramework logo](https://raw.githubusercontent.com/nanoframework/Home/main/resources/logo/nanoFramework-repo-logo.png)
 
 -----
 
-# Welcome to the .NET nanoFramework Hosting Library repository
-Provides convenience methods for creating hosted services with preconfigured defaults.
+# Welcome to the .NET nanoFramework Generic Host Library repository
+The .NET nanoFramework Generic Host provides convenience methods for creating [dependency injection (DI)](https://github.com/nanoframework/nanoFramework.DependencyInjection/tree/main) hosted application container services with preconfigured defaults.
 
 ## Build status
 
@@ -13,17 +15,20 @@ Provides convenience methods for creating hosted services with preconfigured def
 
 ## Samples
 
-[Hosting Sample](https://github.com/nanoframework/Samples/tree/main/samples/Hosting)
+[Hosting Samples](https://github.com/nanoframework/Samples/tree/main/samples/Hosting)
 
-## Example Hosting Container
+[Hosting Unit Tests](https://github.com/nanoframework/nanoFramework.Hosting/tree/main/tests)
+
+## What is a Generic Host
+The Generic Host sets up a default DI application container as well as provides a few services in the DI container which handle the the application lifetime.
+
+When a host starts it calls *Start()* on each implementation of IHostedService registered in the service container's collection of hosted services. In the application container all IHostedService implementations that contain BackgroundService or SchedulerService instances have their *ExecuteAsync* methods called.
+
+This API mirrors as close as possible the official .NET 
+[Generic Host](https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host).
 
 ```csharp
-using System;
-using System.Threading;
-using System.Device.Gpio;
-
 using nanoFramework.Hosting;
-using nanoFramework.DependencyInjection;
 
 namespace Hosting
 {
@@ -31,56 +36,69 @@ namespace Hosting
     {
         public static void Main()
         {
-            var host = CreateHostBuilder();
+            IHost host = CreateHostBuilder().Build();
+            
+            // starts application and blocks the main calling thread 
             host.Run();
         }
 
-        public static IHost CreateHostBuilder() =>
+        public static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton(typeof(HardwareService));
-                    services.AddHostedService(typeof(LedHostedService));
-                }).Build();
+                    services.AddHostedService(typeof(SensorService));
+                    services.AddHostedService(typeof(DisplayService));
+                    services.AddHostedService(typeof(CustomeService));
+                });
     }
+}
+```
 
-    internal class HardwareService : IDisposable
+## BackgroundService base class
+
+Is a base class for implementing a long running IHostedService. The method *ExecuteAsync* is called asynchronously to run the background service. Your implementation of *ExecuteAsync* should finish promptly when the *CancellationRequested* is fired in order to gracefully shut down the service.
+
+```csharp
+public class SensorService : BackgroundService
+{
+    protected override void ExecuteAsync()
     {
-        public GpioController GpioController { get; private set; }
-
-        public HardwareService()
+        while (!CancellationRequested)
         {
-            GpioController = new GpioController();
-        }
-
-        public void Dispose()
-        {
-            GpioController.Dispose();
+            // to allow other threads time to process include 
+            // at least one millsecond sleep in loop
+            Thread.Sleep(1);
         }
     }
+}
+```
 
-    internal class LedHostedService : BackgroundService
-    {
-        private readonly HardwareService _hardware;
+## SchedulerService base class
+A timed background task makes use of the [Timer](https://docs.nanoframework.net/api/System.Threading.Timer.html) class. The timer triggers at specified interval the 'ExecuteAsync' method. The timer is disabled on Stop and disposed when the service container is disposed.
 
-        public LedHostedService(HardwareService hardware)
-        {
-            _hardware = hardware;
-        }
+```csharp
+public class DisplayService : SchedulerService
+{
+    // represents a timer control that involks ExecuteAsync at a 
+    // specified interval of time repeatedly
+    public DisplayService() : base(TimeSpan.FromSeconds(1)) {}
 
-        protected override void ExecuteAsync(CancellationToken cancellationToken)
-        {
-            var ledPin = 16; //LD1;
-
-            GpioPin led = _hardware.GpioController.OpenPin(ledPin, PinMode.Output);
-
-            while (!cancellationToken.IsCancellationRequested)
-            {
-                led.Toggle();
-                Thread.Sleep(100);
-            }
-        }
+    protected override void ExecuteAsync(object state)
+    {   
     }
+}
+```
+
+## IHostedService interface
+
+When you register an IHostedService the host builder will call the *Start* and *Stop* methods of IHostedService type during application start and stop respectively. You can create multiple implementations of IHostedService and register them at the ConfigureService method into the DI container. All hosted services will be started and stopped along with the application.
+
+```csharp
+public class CustomeService : IHostedService
+{
+    public void Start() { }
+
+    public void Stop() { }
 }
 ```
 
