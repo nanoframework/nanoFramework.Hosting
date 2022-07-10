@@ -2,6 +2,7 @@ using System;
 
 using nanoFramework.TestFramework;
 using nanoFramework.DependencyInjection;
+using nanoFramework.Hosting.UnitTests.Fakes;
 
 namespace nanoFramework.Hosting.UnitTests
 {
@@ -93,8 +94,4 @@ namespace nanoFramework.Hosting.UnitTests
             using (hostBuilder.Build()) { }
         }
     }
-
-    public class ServiceA { }
-    
-    public class ServiceB { }
 }

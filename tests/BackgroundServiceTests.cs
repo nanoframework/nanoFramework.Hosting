@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 
 using nanoFramework.TestFramework;
+using nanoFramework.Hosting.UnitTests.Fakes;
 
 namespace nanoFramework.Hosting.UnitTests
 {
@@ -48,58 +49,5 @@ namespace nanoFramework.Hosting.UnitTests
                     () => host.Stop());
         }
 
-    }
-
-    public class FakeBackgroundService : BackgroundService
-    {
-        public bool IsStarted { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsStopped { get; set; }
-
-        public override void Start()
-        {
-            IsStarted = true;
-
-            base.Start();
-        }
-
-        protected override void ExecuteAsync() 
-        {
-            IsCompleted = true;
-
-            while (!CancellationRequested)
-            {
-                Thread.Sleep(10);
-            }
-        }
-
-        public override void Stop()
-        {
-            IsStopped = true;
-
-            base.Stop();
-        }
-    }
-    
-    public class ExecptionBackgroundService : BackgroundService
-    {
-        public override void Start()
-        {
-            base.Start();
-
-            throw new NotImplementedException();
-        }
-
-        protected override void ExecuteAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Stop()
-        {
-            base.Stop();
-
-            throw new NotImplementedException();
-        }
     }
 }

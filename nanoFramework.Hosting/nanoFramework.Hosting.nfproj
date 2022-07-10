@@ -18,7 +18,6 @@
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
-    <Compile Include="Hosting\ExecutingContext.cs" />
     <Compile Include="Hosting\SchedulerService.cs" />
     <Compile Include="Hosting\BackgroundService.cs" />
     <Compile Include="Hosting\Host.cs" />

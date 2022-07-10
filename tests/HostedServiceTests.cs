@@ -1,6 +1,8 @@
 using System;
 
 using nanoFramework.TestFramework;
+using nanoFramework.Hosting.UnitTests.Fakes;
+
 
 namespace nanoFramework.Hosting.UnitTests
 {
@@ -65,35 +67,6 @@ namespace nanoFramework.Hosting.UnitTests
 
             host.Start();
             host.Start();
-        }
-    }
-
-    public class FakeHostedService : IHostedService
-    {
-        public bool IsStarted { get; set; } = false;
-        public bool IsStopped { get; set; } = false;
-
-        public void Start()
-        {
-            IsStarted = true;
-        }
-
-        public void Stop()
-        {
-            IsStopped = true;
-        }
-    }
-
-    public class ExceptionHostedService : IHostedService
-    {
-        public void Start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Stop()
-        {
-            throw new NotImplementedException();
         }
     }
 }

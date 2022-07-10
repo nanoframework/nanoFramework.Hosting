@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 
 using nanoFramework.TestFramework;
+using nanoFramework.Hosting.UnitTests.Fakes;
 
 namespace nanoFramework.Hosting.UnitTests
 {
@@ -46,64 +47,6 @@ namespace nanoFramework.Hosting.UnitTests
 
             Assert.Throws(typeof(AggregateException),
                 () => host.Stop());
-        }
-    }
-
-    public class FakeSchedulerService : SchedulerService
-    {
-        public bool IsStarted { get; set; } = false;
-        public bool IsCompleted { get; set; } = false;
-        public bool IsStopped { get; set; } = false;
-
-        public FakeSchedulerService()
-            : base(TimeSpan.FromMilliseconds(10))
-        {
-        }
-
-        public override void Start()
-        {
-            IsStarted = true;
-
-            base.Start();
-        }
-
-        protected override void ExecuteAsync(object state)
-        {
-            IsCompleted = true;
-        }
-
-        public override void Stop()
-        {
-            IsStopped = true;
-
-            base.Stop();
-        }
-    }
-
-    public class ExecptionSchedulerService : SchedulerService
-    {
-        public ExecptionSchedulerService()
-           : base(TimeSpan.FromSeconds(1))
-        {
-        }
-
-        public override void Start()
-        {
-            base.Start();
-
-            throw new NotImplementedException();
-        }
-
-        protected override void ExecuteAsync(object state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Stop()
-        {
-            base.Stop();
-
-            throw new NotImplementedException();
         }
     }
 }
