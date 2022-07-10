@@ -27,6 +27,7 @@ This API mirrors as close as possible the official .NET
 
 ```csharp
 using nanoFramework.Hosting;
+using nanoFramework.DependencyInjection;
 
 namespace Hosting
 {
@@ -44,9 +45,10 @@ namespace Hosting
             Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
+                    services.AddSingleton(typeof(BackgroundQueue));
                     services.AddHostedService(typeof(SensorService));
                     services.AddHostedService(typeof(DisplayService));
-                    services.AddHostedService(typeof(CustomeService));
+                    services.AddHostedService(typeof(CustomService));
                 });
     }
 }
@@ -92,7 +94,7 @@ public class DisplayService : SchedulerService
 When you register an IHostedService the host builder will call the *Start* and *Stop* methods of IHostedService type during application start and stop respectively. You can create multiple implementations of IHostedService and register them at the ConfigureService method into the DI container. All hosted services will be started and stopped along with the application.
 
 ```csharp
-public class CustomeService : IHostedService
+public class CustomService : IHostedService
 {
     public void Start() { }
 

@@ -20,7 +20,7 @@ namespace nanoFramework.Hosting.UnitTests.Fakes
             base.Start();
         }
 
-        protected override void ExecuteAsync(object state)
+        protected override void ExecuteAsync()
         {
             IsCompleted = true;
         }

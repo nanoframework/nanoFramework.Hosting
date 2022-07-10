@@ -16,7 +16,7 @@ namespace nanoFramework.Hosting.UnitTests.Fakes
             throw new NotImplementedException();
         }
 
-        protected override void ExecuteAsync(object state)
+        protected override void ExecuteAsync()
         {
             throw new NotImplementedException();
         }

@@ -57,16 +57,15 @@ namespace nanoFramework.Hosting
         /// This method is called when the <see cref="IHostedService"/> starts. The implementation should return a thread that represents
         /// the lifetime of the long running operation(s) being performed.
         /// </summary>
-        /// <param name="state">An object containing information to be used by the callback method, or null.</param>
-        protected abstract void ExecuteAsync(object state);
+        protected abstract void ExecuteAsync();
 
         /// <inheritdoc />
         public virtual void Start()
         {
             _executeTimer = new Timer(state =>
             {
-                ExecuteAsync(state);
-            }, _executeTimer, _time, _interval);
+                ExecuteAsync();
+            }, null, _time, _interval);
         }
 
         /// <inheritdoc />
