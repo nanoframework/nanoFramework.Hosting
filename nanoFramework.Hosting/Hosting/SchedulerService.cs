@@ -9,13 +9,12 @@ using System.Threading;
 namespace nanoFramework.Hosting
 {
     /// <summary>
-    /// Base class for implementing a scheduler <see cref="IHostedService"/>.
+    /// Base class timer service which calls an asynchronous action after the configured interval.
     /// </summary>
     public abstract class SchedulerService : IHostedService, IDisposable
     {
         private TimeSpan _time;
         private Timer _executeTimer;
-        private readonly TimeSpan _interval;
 
         /// <summary>
         /// Schedules the immediate execution of <see cref="ExecuteAsync"/> on the provided interval.
@@ -23,7 +22,7 @@ namespace nanoFramework.Hosting
         /// <param name="interval">The <see cref="TimeSpan"/> interval scheduler will execute on.</param>
         protected SchedulerService(TimeSpan interval)
         {
-            _interval = interval;
+            Interval = interval;
             _time = TimeSpan.Zero;
         }
 
@@ -35,7 +34,7 @@ namespace nanoFramework.Hosting
         /// <param name="interval">The <see cref="TimeSpan"/> interval scheduler will execute on.</param>
         protected SchedulerService(int hour, int min, TimeSpan interval)
         {
-            _interval = interval;
+            Interval = interval;
 
             DateTime now = DateTime.UtcNow;
             DateTime initialRun = new DateTime(now.Year, now.Month, now.Day, hour, min, 0, 0);
@@ -54,8 +53,13 @@ namespace nanoFramework.Hosting
         }
 
         /// <summary>
-        /// This method is called when the <see cref="IHostedService"/> starts. The implementation should return a thread that represents
-        /// the lifetime of the long running operation(s) being performed.
+        /// Gets or sets the interval of the timer. This can be changed even after
+        /// the timer was started and will be used on the next round.
+        /// </summary>
+        protected TimeSpan Interval { get; set; }
+
+        /// <summary>
+        /// This method is called each time the timer elapses. 
         /// </summary>
         protected abstract void ExecuteAsync();
 
@@ -65,7 +69,7 @@ namespace nanoFramework.Hosting
             _executeTimer = new Timer(state =>
             {
                 ExecuteAsync();
-            }, null, _time, _interval);
+            }, null, _time, Interval);
         }
 
         /// <inheritdoc />

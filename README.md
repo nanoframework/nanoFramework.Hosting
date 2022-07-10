@@ -20,7 +20,7 @@ The .NET nanoFramework Generic Host provides convenience methods for creating [d
 [Hosting Unit Tests](https://github.com/nanoframework/nanoFramework.Hosting/tree/main/tests)
 
 ## Generic Host
-A Generic Host configures a DI application container as well as provides services in the DI container which handle the the application lifetime. When a host starts it calls *Start* on each implementation of IHostedService registered in the service container's collection of hosted services. In the application container all IHostedService object that inherent BackgroundService or SchedulerService have their *ExecuteAsync* methods called.
+A Generic Host configures a DI application container as well as provides services in the DI container which handle the the application lifetime. When a host starts it calls `Start()` on each implementation of `IHostedService` registered in the service container's collection of hosted services. In the application container all `IHostedService` object that inherent `BackgroundService` or `SchedulerService` have their `ExecuteAsync` methods called.
 
 This API mirrors as close as possible the official .NET 
 [Generic Host](https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host).
@@ -56,7 +56,7 @@ namespace Hosting
 
 ## BackgroundService base class
 
-Provides a base class for implementing a long running IHostedService. The method *ExecuteAsync* is called asynchronously to run the background service. Your implementation of *ExecuteAsync* should finish promptly when the *CancellationRequested* is fired in order to gracefully shut down the service.
+Provides a base class for implementing a long running IHostedService. The method `ExecuteAsync()` is called asynchronously to run the background service. Your implementation of `ExecuteAsync` should finish promptly when the `CancellationRequested` is fired in order to gracefully shut down the service.
 
 ```csharp
 public class SensorService : BackgroundService
@@ -74,7 +74,8 @@ public class SensorService : BackgroundService
 ```
 
 ## SchedulerService base class
- Provides a base class to schedule a thread making use of the [Timer](https://docs.nanoframework.net/api/System.Threading.Timer.html) running IHostedServce. The timer triggers at a specified time and interval the 'ExecuteAsync' method. The timer is disabled on Stop and disposed when the service container is disposed.
+
+ Provides a base class for implementing a scheduled [Timer](https://docs.nanoframework.net/api/System.Threading.Timer.html) running IHostedServce. The timer triggers at a specified time and interval the `ExecuteAsync` method. The timer is disabled on `Stop()` and disposed when the service container is disposed.
 
 ```csharp
 public class DisplayService : SchedulerService
@@ -91,7 +92,7 @@ public class DisplayService : SchedulerService
 
 ## IHostedService interface
 
-When you register an IHostedService the host builder will call the *Start* and *Stop* methods of IHostedService type during application start and stop respectively. You can create multiple implementations of IHostedService and register them at the ConfigureService method into the DI container. All hosted services will be started and stopped along with the application.
+When you register an `IHostedService` the host builder will call the `Start()` and `Stop()` methods of `IHostedService` type during application start and stop respectively. You can create multiple implementations of `IHostedService` and register them at the `ConfigureService()` method into the DI container. All hosted services will be started and stopped along with the application.
 
 ```csharp
 public class CustomService : IHostedService
@@ -99,6 +100,67 @@ public class CustomService : IHostedService
     public void Start() { }
 
     public void Stop() { }
+}
+```
+
+## IServiceCollection extensions method
+
+Extending `IServiceCollection` is a pretty straightforward way to add additional features to the application container.
+
+```csharp
+public static IServiceCollection AddLogging(this IServiceCollection services, LogLevel level)
+{
+    if (services == null)
+    {
+        throw new ArgumentNullException();
+    }
+
+    var loggerFactory = new DebugLoggerFactory();
+    LogDispatcher.LoggerFactory = loggerFactory;
+
+    var logger = (DebugLogger)loggerFactory.GetCurrentClassLogger();
+    logger.MinLogLevel = level;
+
+    // using TryAdd prevents duplicate logging objects if AddLogging() is added more then once
+    services.TryAdd(new ServiceDescriptor(typeof(ILogger), logger));
+    services.TryAdd(new ServiceDescriptor(typeof(ILoggerFactory), loggerFactory));
+
+    return services;
+}
+```
+
+The extention can then be registered like this:
+
+```csharp
+public static IHostBuilder CreateHostBuilder() =>
+    Host.CreateDefaultBuilder()
+        .ConfigureServices(services =>
+        {
+            services.AddLogging(LogLevel.Debug);
+        });
+```
+
+And used like this:
+
+```csharp
+public class LoggingService : IHostedService
+{
+    private ILogger Logger { get; set; }
+
+    public LoggingService(ILogger logger)
+    {
+        Logger = logger;
+    }
+
+    public void Start()
+    {
+        Logger.Log(LogLevel.Information, new EventId(10, "Start"), "Logging started", null);
+    }
+
+    public void Stop()
+    {
+        Logger.Log(LogLevel.Information, new EventId(11, "Stop"), "Logging stopped", null);
+    }
 }
 ```
 
