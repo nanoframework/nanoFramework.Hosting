@@ -39,11 +39,11 @@ namespace nanoFramework.Hosting.Internal
             _hostedServices = Services.GetServices(typeof(IHostedService));
 
             ArrayList exceptions = null;
+            
             foreach (IHostedService hostedService in _hostedServices)
             {
                 try
                 {
-                    // TODO: Thead exceptions are not passed back to main thread. What to do?
                     hostedService.Start();
 
                     if (hostedService is BackgroundService backgroundService)
@@ -73,6 +73,7 @@ namespace nanoFramework.Hosting.Internal
             }
             
             ArrayList exceptions = null;
+
             foreach (IHostedService hostedService in _hostedServices)
             {
                 try
@@ -84,6 +85,10 @@ namespace nanoFramework.Hosting.Internal
                     exceptions ??= new ArrayList();
                     exceptions.Add(ex);
                 }
+                finally
+                {
+                    _hostedServices = null;
+                }
             }
 
             if (exceptions != null)
@@ -92,9 +97,11 @@ namespace nanoFramework.Hosting.Internal
             }
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
-            _hostedServices = null;
+            // TODO:  This is not disposing properly.  Throwing memory errors in some cases
+            //((IDisposable)Services)?.Dispose();
         }
     }
 }

@@ -20,7 +20,7 @@ The .NET nanoFramework Generic Host provides convenience methods for creating [d
 [Hosting Unit Tests](https://github.com/nanoframework/nanoFramework.Hosting/tree/main/tests)
 
 ## Generic Host
-A Generic Host configures a DI application container as well as provides services in the DI container which handle the the application lifetime. When a host starts it calls `Start()` on each implementation of `IHostedService` registered in the service container's collection of hosted services. In the application container all `IHostedService` object that inherent `BackgroundService` or `SchedulerService` have their `ExecuteAsync` methods called.
+A Generic Host configures a DI application container as well as provides services in the DI container which handle the the application lifetime. When a host starts it calls `Start()` on each implementation of `IHostedService` registered in the service container's collection of hosted services. In the application container all `IHostedService` object that inherent `BackgroundService` or `SchedulerService` have their `ExecuteAsync()` methods called.
 
 This API mirrors as close as possible the official .NET 
 [Generic Host](https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host).
@@ -48,15 +48,27 @@ namespace Hosting
                     services.AddSingleton(typeof(BackgroundQueue));
                     services.AddHostedService(typeof(SensorService));
                     services.AddHostedService(typeof(DisplayService));
-                    services.AddHostedService(typeof(CustomService));
                 });
     }
 }
 ```
 
+## IHostedService interface
+
+When you register an `IHostedService` the host builder will call the `Start()` and `Stop()` methods of `IHostedService` type during application start and stop respectively. You can create multiple implementations of `IHostedService` and register them at the `ConfigureService()` method into the DI container. All hosted services will be started and stopped along with the application.
+
+```csharp
+public class CustomService : IHostedService
+{
+    public void Start() { }
+
+    public void Stop() { }
+}
+```
+
 ## BackgroundService base class
 
-Provides a base class for implementing a long running IHostedService. The method `ExecuteAsync()` is called asynchronously to run the background service. Your implementation of `ExecuteAsync` should finish promptly when the `CancellationRequested` is fired in order to gracefully shut down the service.
+Provides a base class for implementing a long running `IHostedService`. The method `ExecuteAsync()` is called asynchronously to run the background service. Your implementation of `ExecuteAsync()` should finish promptly when the `CancellationRequested` is fired in order to gracefully shut down the service.
 
 ```csharp
 public class SensorService : BackgroundService
@@ -75,7 +87,7 @@ public class SensorService : BackgroundService
 
 ## SchedulerService base class
 
- Provides a base class for implementing a scheduled [Timer](https://docs.nanoframework.net/api/System.Threading.Timer.html) running IHostedServce. The timer triggers at a specified time and interval the `ExecuteAsync` method. The timer is disabled on `Stop()` and disposed when the service container is disposed.
+ Provides a base class for implementing a scheduled [Timer](https://docs.nanoframework.net/api/System.Threading.Timer.html) running `IHostedServce`. The timer triggers at a specified time and interval the `ExecuteAsync()` method. The timer is disabled on `Stop()` and disposed when the service container is disposed.
 
 ```csharp
 public class DisplayService : SchedulerService
@@ -87,19 +99,6 @@ public class DisplayService : SchedulerService
     protected override void ExecuteAsync(object state)
     {   
     }
-}
-```
-
-## IHostedService interface
-
-When you register an `IHostedService` the host builder will call the `Start()` and `Stop()` methods of `IHostedService` type during application start and stop respectively. You can create multiple implementations of `IHostedService` and register them at the `ConfigureService()` method into the DI container. All hosted services will be started and stopped along with the application.
-
-```csharp
-public class CustomService : IHostedService
-{
-    public void Start() { }
-
-    public void Stop() { }
 }
 ```
 
@@ -121,7 +120,8 @@ public static IServiceCollection AddLogging(this IServiceCollection services, Lo
     var logger = (DebugLogger)loggerFactory.GetCurrentClassLogger();
     logger.MinLogLevel = level;
 
-    // using TryAdd prevents duplicate logging objects if AddLogging() is added more then once
+    // using TryAdd prevents duplicate logging objects if AddLogging() 
+    // is added more then once to ConfigureServices
     services.TryAdd(new ServiceDescriptor(typeof(ILogger), logger));
     services.TryAdd(new ServiceDescriptor(typeof(ILoggerFactory), loggerFactory));
 
@@ -129,7 +129,7 @@ public static IServiceCollection AddLogging(this IServiceCollection services, Lo
 }
 ```
 
-The extention can then be registered like this:
+The extension can then be registered like this:
 
 ```csharp
 public static IHostBuilder CreateHostBuilder() =>
@@ -137,6 +137,7 @@ public static IHostBuilder CreateHostBuilder() =>
         .ConfigureServices(services =>
         {
             services.AddLogging(LogLevel.Debug);
+            services.AddSingleton(typeof(LoggingService));
         });
 ```
 
@@ -162,6 +163,19 @@ public class LoggingService : IHostedService
         Logger.Log(LogLevel.Information, new EventId(11, "Stop"), "Logging stopped", null);
     }
 }
+```
+
+## Validate On Build
+
+The default builder enables dependency injection validation when the debugger is attached. This check is performed to ensure that all services registered with the container can actually be created. This can be particularly useful during development to fail fast and allow developers to fix the issue. The setting can be modified by using the `UseDefaultServiceProvider()` method.
+
+```csharp
+public static IHostBuilder CreateHostBuilder() =>
+    Host.CreateDefaultBuilder()
+        .UseDefaultServiceProvider(options =>
+        {
+            options.ValidateOnBuild = false;
+        });
 ```
 
 ## Feedback and documentation
