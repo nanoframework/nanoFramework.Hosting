@@ -63,6 +63,11 @@ namespace nanoFramework.Hosting
         /// <inheritdoc />
         public IHostBuilder UseDefaultServiceProvider(ProviderContextDelegate configureDelegate)
         {
+            if (configureDelegate == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             configureDelegate(_hostBuilderContext, _providerOptions);
             
             return this;

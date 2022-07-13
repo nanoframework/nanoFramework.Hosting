@@ -24,7 +24,7 @@ namespace nanoFramework.Hosting.Internal
         {
             if (services == null)
             {
-                throw new ArgumentNullException(nameof(services));
+                throw new ArgumentNullException();
             }
 
             Services = services;
@@ -74,7 +74,7 @@ namespace nanoFramework.Hosting.Internal
             
             ArrayList exceptions = null;
 
-            foreach (IHostedService hostedService in _hostedServices)
+            foreach (IHostedService hostedService in _hostedServices.Reverse())
             {
                 try
                 {

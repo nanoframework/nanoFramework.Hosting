@@ -13,7 +13,6 @@ namespace nanoFramework.Hosting
     /// </summary>
     public abstract class SchedulerService : IHostedService, IDisposable
     {
-        private TimeSpan _time;
         private Timer _executeTimer;
 
         /// <summary>
@@ -23,7 +22,7 @@ namespace nanoFramework.Hosting
         protected SchedulerService(TimeSpan interval)
         {
             Interval = interval;
-            _time = TimeSpan.Zero;
+            Time = TimeSpan.Zero;
         }
 
         /// <summary>
@@ -44,19 +43,31 @@ namespace nanoFramework.Hosting
                 initialRun = initialRun.AddDays(1);
             }
 
-            _time = initialRun - now;
+            Time = initialRun - now;
 
-            if (_time <= TimeSpan.Zero)
+            if (Time <= TimeSpan.Zero)
             {
-                _time = TimeSpan.Zero;
+                Time = TimeSpan.Zero;
             }
         }
 
         /// <summary>
-        /// Gets or sets the interval of the timer. This can be changed even after
-        /// the timer was started and will be used on the next round.
+        /// Gets the due time of the timer. 
         /// </summary>
-        protected TimeSpan Interval { get; set; }
+        protected TimeSpan Time { get; private set; }
+
+        /// <summary>
+        /// Gets the interval of the timer.
+        /// </summary>
+        protected TimeSpan Interval { get; private set; }
+
+        /// <summary>
+        /// Gets the <see cref="Timer"/> that executes the background operation.
+        /// </summary>
+        /// <remarks>
+        /// Will return <see langword="null"/> if the background operation hasn't started.
+        /// </remarks>
+        public virtual Timer ExecuteTimer() => _executeTimer;
 
         /// <summary>
         /// This method is called each time the timer elapses. 
@@ -66,10 +77,11 @@ namespace nanoFramework.Hosting
         /// <inheritdoc />
         public virtual void Start()
         {
+            // Store the timer we're executing
             _executeTimer = new Timer(state =>
             {
                 ExecuteAsync();
-            }, null, _time, Interval);
+            }, null, Time, Interval);
         }
 
         /// <inheritdoc />
