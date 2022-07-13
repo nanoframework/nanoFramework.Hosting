@@ -44,6 +44,20 @@ namespace nanoFramework.Hosting.UnitTests
         }
 
         [TestMethod]
+        public void AddHostedServiceMustInheritInterfaceIHostedService()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService(typeof(FakeHostedService));
+                
+                    Assert.Throws(typeof(ArgumentException),
+                        () => services.AddHostedService(typeof(ServiceA)));
+                
+                }).Build();
+        }
+
+        [TestMethod]
         public void StopWithoutStartNoops()
         {
             var host = Host.CreateDefaultBuilder()

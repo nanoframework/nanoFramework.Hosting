@@ -4,6 +4,7 @@
 //
 
 using System;
+
 using nanoFramework.DependencyInjection;
 
 namespace nanoFramework.Hosting
@@ -37,13 +38,11 @@ namespace nanoFramework.Hosting
             {
                 if (interfaceType.Equals(typeof(IHostedService)))
                 {
-                    break;
+                    return services.AddSingleton(typeof(IHostedService), implementationType);
                 }
-
-                throw new ArgumentException();
             }
 
-            return services.AddSingleton(typeof(IHostedService), implementationType);
+            throw new ArgumentException();
         }
     }
 }
