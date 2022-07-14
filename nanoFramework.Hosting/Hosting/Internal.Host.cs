@@ -40,13 +40,13 @@ namespace nanoFramework.Hosting.Internal
 
             ArrayList exceptions = null;
             
-            foreach (IHostedService hostedService in _hostedServices)
+            for(int index = 0; index < _hostedServices.Length; index++)
             {
                 try
                 {
-                    hostedService.Start();
+                    ((IHostedService)_hostedServices[index]).Start();
 
-                    if (hostedService is BackgroundService backgroundService)
+                    if (_hostedServices[index] is BackgroundService backgroundService)
                     {
                         backgroundService.ExecuteThread().Start();
                     }
@@ -74,11 +74,11 @@ namespace nanoFramework.Hosting.Internal
             
             ArrayList exceptions = null;
 
-            foreach (IHostedService hostedService in _hostedServices.Reverse())
+            for (int index = _hostedServices.Length - 1; index >= 0; index--)
             {
                 try
                 {
-                    hostedService.Stop();
+                    ((IHostedService)_hostedServices[index]).Stop();
                 }
                 catch (Exception ex)
                 {
@@ -100,8 +100,7 @@ namespace nanoFramework.Hosting.Internal
         /// <inheritdoc />
         public void Dispose()
         {
-            // TODO:  This is not disposing properly.  Throwing memory errors in some cases
-            //((IDisposable)Services)?.Dispose();
+            ((IDisposable)Services).Dispose();
         }
     }
 }
