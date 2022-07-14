@@ -3,10 +3,9 @@
 // See LICENSE file in the project root for full license information.
 //
 
+using nanoFramework.DependencyInjection;
 using System;
 using System.Collections;
-
-using nanoFramework.DependencyInjection;
 
 namespace nanoFramework.Hosting.Internal
 {
@@ -39,8 +38,8 @@ namespace nanoFramework.Hosting.Internal
             _hostedServices = Services.GetServices(typeof(IHostedService));
 
             ArrayList exceptions = null;
-            
-            for(int index = 0; index < _hostedServices.Length; index++)
+
+            for (int index = 0; index < _hostedServices.Length; index++)
             {
                 try
                 {
@@ -71,7 +70,7 @@ namespace nanoFramework.Hosting.Internal
             {
                 return;
             }
-            
+
             ArrayList exceptions = null;
 
             for (int index = _hostedServices.Length - 1; index >= 0; index--)

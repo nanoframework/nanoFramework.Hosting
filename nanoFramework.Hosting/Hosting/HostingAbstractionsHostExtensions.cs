@@ -25,8 +25,8 @@ namespace nanoFramework.Hosting
                 throw new ArgumentNullException();
             }
 
-            host.Start();       
-            
+            host.Start();
+
             Thread.Sleep(Timeout.Infinite);
         }
     }
