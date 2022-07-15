@@ -22,11 +22,11 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="WebSockets.Server\bin\Release\nanoFramework.Hosting.dll" target="lib\nanoFramework.Hosting.dll" />
-    <file src="WebSockets.Server\bin\Release\nanoFramework.Hosting.pdb" target="lib\nanoFramework.Hosting.pdb" />
-    <file src="WebSockets.Server\bin\Release\nanoFramework.Hosting.pdbx" target="lib\nanoFramework.Hosting.pdbx" />
-    <file src="WebSockets.Server\bin\Release\nanoFramework.Hosting.pe" target="lib\nanoFramework.Hosting.pe" />
-    <file src="WebSockets.Server\bin\Release\nanoFramework.Hosting.xml" target="lib\nanoFramework.Hosting.xml" />
+    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.dll" target="lib\nanoFramework.Hosting.dll" />
+    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.pdb" target="lib\nanoFramework.Hosting.pdb" />
+    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.pdbx" target="lib\nanoFramework.Hosting.pdbx" />
+    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.pe" target="lib\nanoFramework.Hosting.pe" />
+    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.xml" target="lib\nanoFramework.Hosting.xml" />
     <file src="assets\readme.txt" target="" />
     <file src="README.md" target="docs\" />
     <file src="assets\nf-logo.png" target="images\" />
