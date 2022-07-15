@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -7,7 +6,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("nanoFramework.Hosting")]
 [assembly: AssemblyCompany("nanoFramework Contributors")]
-[assembly: AssemblyProduct(".NET nanoframework nanoFramework.DependencyInjection")]
+[assembly: AssemblyProduct(".NET nanoFramework nanoFramework.DependencyInjection")]
 [assembly: AssemblyCopyright("Copyright (c) .NET Foundation and Contributors")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

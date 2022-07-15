@@ -45,6 +45,9 @@
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.12.0\lib\mscorlib.dll</HintPath>
     </Reference>
+    <Reference Include="nanoFramework.DependencyInjection">
+      <HintPath>..\packages\nanoFramework.DependencyInjection.1.0.2\lib\nanoFramework.DependencyInjection.dll</HintPath>
+    </Reference>
     <Reference Include="nanoFramework.TestFramework">
       <HintPath>..\packages\nanoFramework.TestFramework.1.0.209\lib\nanoFramework.TestFramework.dll</HintPath>
     </Reference>
@@ -57,7 +60,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\nanoFramework.DependencyInjection\nanoFramework.DependencyInjection\nanoFramework.DependencyInjection.nfproj" />
     <ProjectReference Include="..\nanoFramework.Hosting\nanoFramework.Hosting.nfproj" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
