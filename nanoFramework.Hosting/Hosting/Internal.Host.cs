@@ -84,15 +84,13 @@ namespace nanoFramework.Hosting.Internal
                     exceptions ??= new ArrayList();
                     exceptions.Add(ex);
                 }
-                finally
-                {
-                    _hostedServices = null;
-                }
             }
+
+            _hostedServices = null;
 
             if (exceptions != null)
             {
-                throw new AggregateException(string.Empty, exceptions); ;
+                throw new AggregateException(string.Empty, exceptions);
             }
         }
 

@@ -55,7 +55,7 @@ namespace Hosting
 
 ## IHostedService interface
 
-When you register an `IHostedService` the host builder will call the `Start()` and `Stop()` methods of `IHostedService` type during application start and stop respectively. You can create multiple implementations of `IHostedService` and register them at the `ConfigureService()` method into the DI container. All hosted services will be started and stopped along with the application.
+When you register an `IHostedService` the host builder will call the `Start()` and `Stop()` methods of `IHostedService` during application start and stop respectively. You can create multiple implementations of `IHostedService` and register them using the `ConfigureService()` method in the DI container. All hosted services will be started and stopped along with the application.
 
 ```csharp
 public class CustomService : IHostedService
@@ -167,7 +167,7 @@ public class LoggingService : IHostedService
 
 ## Validate On Build
 
-The default builder enables dependency injection validation when the debugger is attached. This check is performed to ensure that all services registered with the container can actually be created. This can be particularly useful during development to fail fast and allow developers to fix the issue. The setting can be modified by using the `UseDefaultServiceProvider()` method.
+The default builder enables DI validation when the debugger is attached. This check is performed to ensure that all services registered with the container can actually be created. This can be particularly useful during development to fail fast and allow developers to fix issues. The setting can be modified by using the `UseDefaultServiceProvider()` method.
 
 ```csharp
 public static IHostBuilder CreateHostBuilder() =>
