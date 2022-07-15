@@ -6,7 +6,7 @@
                                                                                
 ===================================================================================
 
-API docs: https://docs.nanoframework.net/api/nanoFramework.DependencyInjection.html
+API docs: https://docs.nanoframework.net/api/nanoFramework.Hosting.html
 
 Browse our samples repository: https://github.com/nanoframework/samples
 
