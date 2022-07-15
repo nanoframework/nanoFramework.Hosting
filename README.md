@@ -11,7 +11,7 @@ The .NET nanoFramework Generic Host provides convenience methods for creating [d
 
 | Component | Build Status | NuGet Package |
 |:-|---|---|
-| nanoFramework.Hosting | [![Build Status](https://dev.azure.com/nanoframework/nanoFramework.Hosting/_apis/build/status/nanoframework.Hosting?repoName=nanoframework%2FnanoFramework.Hosting&branchName=main)](https://dev.azure.com/nanoframework/nanoFramework.Hosting/_build/latest?definitionId=56&repoName=nanoframework%2FnanoFramework.Hosting&branchName=main) | [![NuGet](https://img.shields.io/nuget/v/nanoFramework.Hosting.svg?label=NuGet&style=flat&logo=nuget)](https://www.nuget.org/packages/nanoFramework.Hosting/) |
+| nanoFramework.Hosting | [![Build Status](https://dev.azure.com/nanoframework/nanoFramework.Hosting/_apis/build/status/nanoFramework.Hosting?branchName=main)](https://dev.azure.com/nanoframework/nanoFramework.Hosting/_build/latest?definitionId=96&branchName=main) | [![NuGet](https://img.shields.io/nuget/v/nanoFramework.Hosting.svg?label=NuGet&style=flat&logo=nuget)](https://www.nuget.org/packages/nanoFramework.Hosting/) |
 
 ## Samples
 
