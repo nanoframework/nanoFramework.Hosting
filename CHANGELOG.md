@@ -1,8 +1,8 @@
 # Changelog
 
-## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/nanoFramework.Hosting/tree/HEAD)
+## [v1.0.6](https://github.com/nanoframework/nanoFramework.Hosting/tree/v1.0.6) (2022-07-15)
 
-[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/22fae3b7cfb29c8e38951e1a64e1de213897adf6...HEAD)
+[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/22fae3b7cfb29c8e38951e1a64e1de213897adf6...v1.0.6)
 
 **Documentation and other chores:**
 
