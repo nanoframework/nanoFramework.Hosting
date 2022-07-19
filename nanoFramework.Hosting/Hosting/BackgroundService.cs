@@ -11,7 +11,7 @@ namespace nanoFramework.Hosting
     /// <summary>
     /// Base class for implementing a long running <see cref="IHostedService"/>.
     /// </summary>
-    public abstract class BackgroundService : IHostedService, IDisposable
+    public abstract class BackgroundService : IHostedService
     {
         private Thread _executeThread;
 
@@ -69,8 +69,5 @@ namespace nanoFramework.Hosting
                 _executeThread = null;
             }
         }
-
-        /// <inheritdoc />
-        public virtual void Dispose() { }
     }
 }

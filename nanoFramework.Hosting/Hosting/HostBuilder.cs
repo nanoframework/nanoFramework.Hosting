@@ -16,7 +16,6 @@ namespace nanoFramework.Hosting
     public class HostBuilder : IHostBuilder
     {
         private bool _hostBuilt;
-        private IServiceProvider _appServices;
         private HostBuilderContext _hostBuilderContext;
 
         private readonly ServiceProviderOptions _providerOptions;
@@ -95,14 +94,14 @@ namespace nanoFramework.Hosting
                 configureServicesAction(_hostBuilderContext, services);
             }
 
-            _appServices = services.BuildServiceProvider(_providerOptions);
+            var appServices = services.BuildServiceProvider(_providerOptions);
 
-            if (_appServices == null)
+            if (appServices == null)
             {
                 throw new InvalidOperationException();
             }
 
-            return (Internal.Host)_appServices.GetRequiredService(typeof(IHost));
+            return (Internal.Host)appServices.GetRequiredService(typeof(IHost));
         }
     }
 }

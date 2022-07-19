@@ -12,8 +12,9 @@ namespace nanoFramework.Hosting.Internal
     /// <summary>
     /// Default implementation of <see cref="IHost"/>.
     /// </summary>
-    internal class Host : IHost, IDisposable
+    internal class Host : IHost
     {
+        private bool _disposed;
         private object[] _hostedServices;
 
         /// <summary>
@@ -94,10 +95,24 @@ namespace nanoFramework.Hosting.Internal
             }
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    ((IDisposable)Services).Dispose();
+                }
+
+                _disposed = true;
+            }
+        }
+
         /// <inheritdoc />
         public void Dispose()
         {
-            ((IDisposable)Services).Dispose();
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
