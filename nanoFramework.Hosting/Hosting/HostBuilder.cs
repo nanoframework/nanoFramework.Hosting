@@ -94,14 +94,14 @@ namespace nanoFramework.Hosting
                 configureServicesAction(_hostBuilderContext, services);
             }
 
-            var _appServices = services.BuildServiceProvider(_providerOptions);
+            var appServices = services.BuildServiceProvider(_providerOptions);
 
-            if (_appServices == null)
+            if (appServices == null)
             {
                 throw new InvalidOperationException();
             }
 
-            return (Internal.Host)_appServices.GetRequiredService(typeof(IHost));
+            return (Internal.Host)appServices.GetRequiredService(typeof(IHost));
         }
     }
 }
