@@ -2,7 +2,19 @@
 
 ## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/nanoFramework.Hosting/tree/HEAD)
 
-[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/v1.0.7...HEAD)
+[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/v1.0.10...HEAD)
+
+**Documentation and other chores:**
+
+- Update 1 NuGet dependencies [\#8](https://github.com/nanoframework/nanoFramework.Hosting/pull/8)
+- Update 1 NuGet dependencies [\#7](https://github.com/nanoframework/nanoFramework.Hosting/pull/7)
+- Update 1 NuGet dependencies [\#6](https://github.com/nanoframework/nanoFramework.Hosting/pull/6)
+- Update 1 NuGet dependencies [\#5](https://github.com/nanoframework/nanoFramework.Hosting/pull/5)
+- Update 1 NuGet dependencies [\#4](https://github.com/nanoframework/nanoFramework.Hosting/pull/4)
+
+## [v1.0.10](https://github.com/nanoframework/nanoFramework.Hosting/tree/v1.0.10) (2022-08-05)
+
+[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/v1.0.7...v1.0.10)
 
 **Documentation and other chores:**
 
