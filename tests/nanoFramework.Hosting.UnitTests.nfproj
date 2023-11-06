@@ -21,6 +21,7 @@
     <IsTestProject>true</IsTestProject>
     <TestProjectType>UnitTest</TestProjectType>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <PropertyGroup>
@@ -47,7 +48,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection">
-      <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.1\lib\nanoFramework.DependencyInjection.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.DependencyInjection.1.0.35\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection, Version=1.0.22.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.0.22\lib\nanoFramework.DependencyInjection.dll</HintPath>
@@ -68,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nanoFramework.Hosting\nanoFramework.Hosting.nfproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.lock.json" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
   <!-- MANUAL UPDATE HERE -->

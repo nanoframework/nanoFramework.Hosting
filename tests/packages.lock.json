@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETnanoFramework,Version=v1.0": {
+      "nanoFramework.DependencyInjection": {
+        "type": "Direct",
+        "requested": "[1.0.35, 1.0.35]",
+        "resolved": "1.0.35",
+        "contentHash": "yiiFZ7G6Z9nmBKryvwAUqGK9qcJf4xzhzE5MR2rdRQQyjLMzj8qWmOk8s2rRn8B3WWBINlACZ1siLvdfFHkcXg=="
+      }
+    }
+  }
+}
