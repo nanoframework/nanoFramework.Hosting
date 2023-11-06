@@ -4,9 +4,8 @@
 //
 
 using System;
-
+using Microsoft.Extensions.DependencyInjection;
 using nanoFramework.TestFramework;
-using nanoFramework.DependencyInjection;
 using nanoFramework.Hosting.UnitTests.Fakes;
 
 namespace nanoFramework.Hosting.UnitTests
