@@ -2,7 +2,25 @@
 
 ## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/nanoFramework.Hosting/tree/HEAD)
 
-[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/v1.0.16...HEAD)
+[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/v1.0.25...HEAD)
+
+**Documentation and other chores:**
+
+- Switching to the Microsoft.Extensions.DependencyInjection namespace [\#27](https://github.com/nanoframework/nanoFramework.Hosting/pull/27)
+- Update 1 NuGet dependencies [\#26](https://github.com/nanoframework/nanoFramework.Hosting/pull/26)
+- Update 1 NuGet dependencies [\#25](https://github.com/nanoframework/nanoFramework.Hosting/pull/25)
+- Update 1 NuGet dependencies [\#24](https://github.com/nanoframework/nanoFramework.Hosting/pull/24)
+- Update 2 NuGet dependencies [\#23](https://github.com/nanoframework/nanoFramework.Hosting/pull/23)
+- Update 1 NuGet dependencies [\#22](https://github.com/nanoframework/nanoFramework.Hosting/pull/22)
+- Update 1 NuGet dependencies [\#21](https://github.com/nanoframework/nanoFramework.Hosting/pull/21)
+- Update 1 NuGet dependencies [\#20](https://github.com/nanoframework/nanoFramework.Hosting/pull/20)
+- Update 1 NuGet dependencies [\#19](https://github.com/nanoframework/nanoFramework.Hosting/pull/19)
+- Update 1 NuGet dependencies [\#18](https://github.com/nanoframework/nanoFramework.Hosting/pull/18)
+- Update 1 NuGet dependencies [\#17](https://github.com/nanoframework/nanoFramework.Hosting/pull/17)
+
+## [v1.0.25](https://github.com/nanoframework/nanoFramework.Hosting/tree/v1.0.25) (2022-12-23)
+
+[Full Changelog](https://github.com/nanoframework/nanoFramework.Hosting/compare/v1.0.16...v1.0.25)
 
 **Documentation and other chores:**
 
