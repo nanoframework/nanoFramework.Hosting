@@ -2,11 +2,23 @@
   "version": 1,
   "dependencies": {
     ".NETnanoFramework,Version=v1.0": {
+      "nanoFramework.CoreLibrary": {
+        "type": "Direct",
+        "requested": "[1.14.2, 1.14.2]",
+        "resolved": "1.14.2",
+        "contentHash": "j1mrz4mitl5LItvmHMsw1aHzCAfvTTgIkRxA0mhs5mSpctJ/BBcuNwua5j3MspfRNKreCQPy/qZy/D9ADLL/PA=="
+      },
       "nanoFramework.DependencyInjection": {
         "type": "Direct",
-        "requested": "[1.0.35, 1.0.35]",
-        "resolved": "1.0.35",
-        "contentHash": "yiiFZ7G6Z9nmBKryvwAUqGK9qcJf4xzhzE5MR2rdRQQyjLMzj8qWmOk8s2rRn8B3WWBINlACZ1siLvdfFHkcXg=="
+        "requested": "[1.1.1, 1.1.1]",
+        "resolved": "1.1.1",
+        "contentHash": "5o8nNBD5ZjZTcwRPfvBkh/0xFeMKpQ/lyB44sJgHQc6qi3+MthhrBr4QVyT95lVRd4xVtSLsONw+AzOc8J4dMg=="
+      },
+      "Nerdbank.GitVersioning": {
+        "type": "Direct",
+        "requested": "[3.6.133, 3.6.133]",
+        "resolved": "3.6.133",
+        "contentHash": "VZWMd5YAeDxpjWjAP/X6bAxnRMiEf6tES/ITN0X5CHJgkWLLeHGmEALivmTAfYM6P+P/3Szy6VCITUAkqjcHVw=="
       }
     }
   }
