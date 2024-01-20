@@ -36,11 +36,17 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  DOTNET_NOLOGO: true
-  solution: 'nanoFramework.Hosting.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  nugetPackageName: 'nanoFramework.Hosting'
+  - group: sign-client-credentials
+  - name: DOTNET_NOLOGO
+    value: true  
+  - name: buildPlatform
+    value: 'Any CPU'  
+  - name: buildConfiguration
+    value: 'Release'
+  - name: solution
+    value: 'nanoFramework.Hosting.sln'
+  - name: nugetPackageName
+    value: 'nanoFramework.Hosting'
 
 steps:
 
