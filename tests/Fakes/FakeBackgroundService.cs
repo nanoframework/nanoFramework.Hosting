@@ -9,32 +9,24 @@ namespace nanoFramework.Hosting.UnitTests.Fakes
 {
     public class FakeBackgroundService : BackgroundService
     {
-        public bool IsStarted { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsStopped { get; set; }
+        public bool IsStarted { get; private set; }
+        public bool IsStopped { get; private set; }
 
-        public override void Start()
-        {
-            IsStarted = true;
-
-            base.Start();
-        }
+        public ManualResetEvent StartedEvent { get; } = new(false);
+        public ManualResetEvent StoppedEvent { get; } = new(false);
 
         protected override void ExecuteAsync()
         {
-            IsCompleted = true;
+            IsStarted = true;
+            StartedEvent.Set();
 
             while (!CancellationRequested)
             {
                 Thread.Sleep(10);
             }
-        }
 
-        public override void Stop()
-        {
             IsStopped = true;
-
-            base.Stop();
+            StoppedEvent.Set();
         }
     }
 }

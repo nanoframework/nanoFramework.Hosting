@@ -3,9 +3,6 @@
 // See LICENSE file in the project root for full license information.
 //
 
-using System;
-using System.Threading;
-
 using nanoFramework.TestFramework;
 using nanoFramework.Hosting.UnitTests.Fakes;
 
@@ -15,43 +12,45 @@ namespace nanoFramework.Hosting.UnitTests
     public class BackgroundServiceTests
     {
         [TestMethod]
-        public void StartStopAndDisposeBackgroundService()
+        public void Start_starts_background_thread()
         {
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService(typeof(FakeBackgroundService));
-                }).Build();
+            using var sut = new FakeBackgroundService();
 
-            var service = (FakeBackgroundService)host.Services.GetService(typeof(IHostedService));
-            Assert.NotNull(service);
+            try
+            {
+                sut.Start();
+                sut.StartedEvent.WaitOne(1000, false);
 
-            host.Start();
-            Assert.True(service.IsStarted);
-
-            Thread.Sleep(10);
-            Assert.True(service.IsCompleted);
-
-            host.Stop();
-            Assert.True(service.IsStopped);
-
-            host.Dispose();
+                Assert.IsTrue(sut.IsStarted);
+                Assert.IsFalse(sut.IsStopped);
+            }
+            finally
+            {
+                sut.Stop();
+            }
         }
 
         [TestMethod]
-        public void StartStopBackgroundServiceThrowsAggregateException()
+        public void Stops_stops_background_thread()
         {
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService(typeof(ExecptionBackgroundService));
-                }).Build();
+            using var sut = new FakeBackgroundService();
 
-                Assert.Throws(typeof(AggregateException),
-                    () => host.Start());
+            try
+            {
+                sut.Start();
+                sut.StartedEvent.WaitOne(1000, false);
 
-                Assert.Throws(typeof(AggregateException),
-                    () => host.Stop());
+                Assert.IsTrue(sut.IsStarted);
+
+                sut.Stop();
+                sut.StoppedEvent.WaitOne(1000, false);
+
+                Assert.IsTrue(sut.IsStopped);
+            }
+            finally
+            {
+                sut.Stop();
+            }
         }
     }
 }

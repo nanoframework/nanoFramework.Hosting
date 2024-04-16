@@ -38,6 +38,7 @@ namespace nanoFramework.Hosting.UnitTests
             host.Dispose();
         }
 
+        // TODO: This isn't a SchedulerService test. It's a HostBuilder test and it's already covered.
         [TestMethod]
         public void StartStopSchedulerServiceThrowsAggregateException()
         {

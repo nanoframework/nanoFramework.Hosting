@@ -35,6 +35,8 @@ namespace nanoFramework.Hosting.Internal
         /// <inheritdoc />
         public void Start()
         {
+            // TODO: Should check if started and no-op if so
+
             _hostedServices = Services.GetServices(typeof(IHostedService));
 
             ArrayList exceptions = null;
@@ -61,6 +63,8 @@ namespace nanoFramework.Hosting.Internal
         /// <inheritdoc />
         public void Stop()
         {
+            // TODO: Should check if started and no-op if not
+
             if (_hostedServices == null)
             {
                 return;
