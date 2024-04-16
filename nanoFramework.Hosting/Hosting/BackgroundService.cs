@@ -16,22 +16,17 @@ namespace nanoFramework.Hosting
         private Thread _executeThread;
 
         /// <summary>
-        /// Gets or sets the amount of time to wait for the <see cref="ExecuteThread"/> to terminate.
-        /// </summary>
-        protected TimeSpan ShutdownTimeout { get; set; } = TimeSpan.FromSeconds(10);
-
-        /// <summary>
         /// Gets or sets whether cancellation has been requested for this service.
         /// </summary>
         protected bool CancellationRequested { get; set; } = false;
 
         /// <summary>
-        /// Gets the <see cref="Thread"/> that executes the background operation.
+        /// Gets or sets the amount of time to wait for the <see cref="Thread"/> to terminate.
         /// </summary>
-        /// <remarks>
-        /// Will return <see langword="null"/> if the background operation hasn't started.
-        /// </remarks>
-        protected Thread ExecuteThread() => _executeThread;
+        protected TimeSpan ShutdownTimeout { get; set; } = TimeSpan.FromSeconds(10);
+
+        /// <inheritdoc />
+        public virtual void Dispose() { }
 
         /// <summary>
         /// This method is called when the <see cref="IHostedService"/> starts.
@@ -67,8 +62,5 @@ namespace nanoFramework.Hosting
                 _executeThread = null;
             }
         }
-
-        /// <inheritdoc />
-        public virtual void Dispose() { }
     }
 }
