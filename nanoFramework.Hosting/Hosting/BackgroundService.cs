@@ -39,7 +39,7 @@ namespace nanoFramework.Hosting
         protected abstract void ExecuteAsync();
 
         /// <inheritdoc />
-        public virtual void Start()
+        public void Start()
         {
             // Store the thread we're executing
             _executeThread = new Thread(ExecuteAsync);
@@ -47,15 +47,15 @@ namespace nanoFramework.Hosting
         }
 
         /// <inheritdoc />
-        public virtual void Stop()
+        public void Stop()
         {
+            // Signal cancellation to the executing method
+            CancellationRequested = true;
+
             if (_executeThread == null)
             {
                 return;
             }
-
-            // Signal cancellation to the executing method
-            CancellationRequested = true;
 
             try
             {
