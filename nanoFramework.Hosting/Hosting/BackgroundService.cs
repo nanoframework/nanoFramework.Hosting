@@ -42,10 +42,8 @@ namespace nanoFramework.Hosting
         public virtual void Start()
         {
             // Store the thread we're executing
-            _executeThread = new Thread(() =>
-            {
-                ExecuteAsync();
-            });
+            _executeThread = new Thread(ExecuteAsync);
+            _executeThread.Start();
         }
 
         /// <inheritdoc />
