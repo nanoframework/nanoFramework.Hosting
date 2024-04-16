@@ -44,11 +44,6 @@ namespace nanoFramework.Hosting.Internal
                 try
                 {
                     ((IHostedService)_hostedServices[index]).Start();
-
-                    if (_hostedServices[index] is BackgroundService backgroundService)
-                    {
-                        backgroundService.ExecuteThread().Start();
-                    }
                 }
                 catch (Exception ex)
                 {
