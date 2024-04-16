@@ -31,7 +31,7 @@ namespace nanoFramework.Hosting
         /// <remarks>
         /// Will return <see langword="null"/> if the background operation hasn't started.
         /// </remarks>
-        public virtual Thread ExecuteThread() => _executeThread;
+        protected Thread ExecuteThread() => _executeThread;
 
         /// <summary>
         /// This method is called when the <see cref="IHostedService"/> starts.
