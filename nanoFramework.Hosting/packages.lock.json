@@ -4,15 +4,15 @@
     "Unsupported,Version=v0.0": {
       "nanoFramework.CoreLibrary": {
         "type": "Direct",
-        "requested": "[1.15.5, 1.15.5]",
-        "resolved": "1.15.5",
-        "contentHash": "u2+GvAp1uxLrGdILACAZy+EVKOs28EQ52j8Lz7599egXZ3GBGejjnR2ofhjMQwzrJLlgtyrsx8nSLngDfJNsAg=="
+        "requested": "[1.16.1, 1.16.1]",
+        "resolved": "1.16.1",
+        "contentHash": "pUQR6+CuheWC6UXkiIXhmknPkm50OYuKs6TcIBieV50D1R991QSJUFWjM1AixT/37REh8rzx2OAPgX6YDs06zA=="
       },
       "nanoFramework.DependencyInjection": {
         "type": "Direct",
-        "requested": "[1.1.11, 1.1.11]",
-        "resolved": "1.1.11",
-        "contentHash": "9YKkTehl/1ZUxzx5o6zJPd0g0Qm1XibUDSkA+hpbcf5OVpoV2ciWyMLwz3+cbWf/IFSm7De7HrZclOukTxYS8w=="
+        "requested": "[1.1.23, 1.1.23]",
+        "resolved": "1.1.23",
+        "contentHash": "rG6v8+02VTRgqc4YW2rt45lat3sFyvOEvxRlXGBb6MMbMwSWIjAkOmQCCw5YCck/JpY9zoFg0qf+K/tFAFw0jQ=="
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
