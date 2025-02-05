@@ -6,7 +6,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace nanoFramework.Hosting
+namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
     /// Extensions for <see cref="IHostBuilder"/>.
@@ -21,12 +21,7 @@ namespace nanoFramework.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public static IHostBuilder ConfigureServices(this IHostBuilder hostBuilder, ServiceAction configureDelegate)
         {
-            if (hostBuilder == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            return hostBuilder.ConfigureServices((context, collection) => configureDelegate(collection));
+            return hostBuilder.ConfigureServices((_, collection) => configureDelegate(collection));
         }
 
         /// <summary>
@@ -37,11 +32,6 @@ namespace nanoFramework.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public static IHostBuilder UseDefaultServiceProvider(this IHostBuilder hostBuilder, ProviderAction configureDelegate)
         {
-            if (hostBuilder == null)
-            {
-                throw new ArgumentNullException();
-            }
-
             return hostBuilder.UseDefaultServiceProvider((context, options) => configureDelegate(options));
         }
     }
