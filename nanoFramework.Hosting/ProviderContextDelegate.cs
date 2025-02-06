@@ -5,7 +5,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace nanoFramework.Hosting
+namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
     /// Represents a function that can process a provider.
