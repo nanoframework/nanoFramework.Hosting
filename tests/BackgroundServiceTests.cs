@@ -3,11 +3,9 @@
 // See LICENSE file in the project root for full license information.
 //
 
-using System;
 using System.Threading;
-
+using nanoFramework.Hosting.UnitTests.Mocks;
 using nanoFramework.TestFramework;
-using nanoFramework.Hosting.UnitTests.Fakes;
 
 namespace nanoFramework.Hosting.UnitTests
 {
@@ -15,43 +13,47 @@ namespace nanoFramework.Hosting.UnitTests
     public class BackgroundServiceTests
     {
         [TestMethod]
-        public void StartStopAndDisposeBackgroundService()
+        public void Dispose_stops_thread()
         {
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService(typeof(FakeBackgroundService));
-                }).Build();
+            var cancellationToken = new CancellationTokenSource().Token;
+            var service = new MockBackgroundService();
 
-            var service = (FakeBackgroundService)host.Services.GetService(typeof(IHostedService));
-            Assert.NotNull(service);
+            service.StartAsync(cancellationToken);
 
-            host.Start();
-            Assert.True(service.IsStarted);
+            Assert.IsTrue(service.StartAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCalled.WaitForEvent());
 
-            Thread.Sleep(10);
-            Assert.True(service.IsCompleted);
+            service.Dispose();
 
-            host.Stop();
-            Assert.True(service.IsStopped);
-
-            host.Dispose();
+            Assert.IsTrue(service.ExecuteAsyncCompleted.WaitForEvent());
         }
 
         [TestMethod]
-        public void StartStopBackgroundServiceThrowsAggregateException()
+        public void StartAsync_starts_thread()
         {
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService(typeof(ExecptionBackgroundService));
-                }).Build();
+            var cancellationToken = new CancellationTokenSource().Token;
+            using var service = new MockBackgroundService();
 
-                Assert.Throws(typeof(AggregateException),
-                    () => host.Start());
+            service.StartAsync(cancellationToken);
 
-                Assert.Throws(typeof(AggregateException),
-                    () => host.Stop());
+            Assert.IsTrue(service.StartAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCalled.WaitForEvent());
+        }
+
+        [TestMethod]
+        public void StopAsync_stops_thread()
+        {
+            var cancellationToken = new CancellationTokenSource().Token;
+            var service = new MockBackgroundService();
+
+            service.StartAsync(cancellationToken);
+
+            Assert.IsTrue(service.StartAsyncCalled.WaitForEvent());
+
+            service.StopAsync(cancellationToken);
+
+            Assert.IsTrue(service.StopAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCompleted.WaitForEvent());
         }
     }
 }

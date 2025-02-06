@@ -3,11 +3,9 @@
 // See LICENSE file in the project root for full license information.
 //
 
-using System;
 using System.Threading;
-
+using nanoFramework.Hosting.UnitTests.Mocks;
 using nanoFramework.TestFramework;
-using nanoFramework.Hosting.UnitTests.Fakes;
 
 namespace nanoFramework.Hosting.UnitTests
 {
@@ -15,43 +13,56 @@ namespace nanoFramework.Hosting.UnitTests
     public class SchedulerServiceTests
     {
         [TestMethod]
-        public void StartStopAndDisposeSchedulerService()
+        public void Dispose_stops_timer()
         {
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService(typeof(FakeSchedulerService));
-                }).Build();
+            var cancellationToken = new CancellationTokenSource().Token;
+            var service = new MockSchedulerService();
 
-            var service = (FakeSchedulerService)host.Services.GetService(typeof(IHostedService));
-            Assert.NotNull(service);
+            service.StartAsync(cancellationToken);
 
-            host.Start();
-            Assert.True(service.IsStarted);
+            Assert.IsTrue(service.StartAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCompleted.WaitForEvent());
 
-            Thread.Sleep(20);
-            Assert.True(service.IsCompleted);
+            service.Dispose();
 
-            host.Stop();
-            Assert.True(service.IsStopped);
-
-            host.Dispose();
+            var executions = service.Executions;
+            Thread.Sleep((int) TestHelper.SleepDelay.TotalMilliseconds * 3);
+            Assert.AreEqual(executions, service.Executions);
         }
 
         [TestMethod]
-        public void StartStopSchedulerServiceThrowsAggregateException()
+        public void StartAsync_starts_thread()
         {
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService(typeof(ExecptionSchedulerService));
-                }).Build();
+            var cancellationToken = new CancellationTokenSource().Token;
+            using var service = new MockSchedulerService();
 
-            Assert.Throws(typeof(AggregateException),
-                () => host.Start());
+            service.StartAsync(cancellationToken);
 
-            Assert.Throws(typeof(AggregateException),
-                () => host.Stop());
+            Assert.IsTrue(service.StartAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCompleted.WaitForEvent());
+        }
+
+        [TestMethod]
+        public void StopAsync_stops_thread()
+        {
+            var cancellationToken = new CancellationTokenSource().Token;
+            var service = new MockSchedulerService();
+
+            service.StartAsync(cancellationToken);
+
+            Assert.IsTrue(service.StartAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCalled.WaitForEvent());
+
+            service.StopAsync(cancellationToken);
+
+            Assert.IsTrue(service.StopAsyncCalled.WaitForEvent());
+            Assert.IsTrue(service.ExecuteAsyncCompleted.WaitForEvent());
+
+            var executions = service.Executions;
+            Thread.Sleep((int)TestHelper.SleepDelay.TotalMilliseconds * 3);
+            Assert.AreEqual(executions, service.Executions);
         }
     }
 }
