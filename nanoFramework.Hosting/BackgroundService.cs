@@ -14,8 +14,14 @@ namespace Microsoft.Extensions.Hosting
     /// </summary>
     public abstract class BackgroundService : IHostedService, IDisposable
     {
+        private bool _disposed;
         private Thread? _executeThread;
         private CancellationTokenSource? _stoppingCts;
+
+        ~BackgroundService()
+        {
+            Dispose(false);
+        }
 
         /// <summary>
         /// Gets or sets the amount of time to wait for the <see cref="ExecuteThread"/> to terminate.
@@ -78,9 +84,37 @@ namespace Microsoft.Extensions.Hosting
         }
 
         /// <inheritdoc />
-        public virtual void Dispose()
+        public void Dispose()
         {
-            _stoppingCts?.Cancel();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases the unmanaged resources used by the <see cref="BackgroundService"/> and optionally releases the managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// <see langword="true"/> to release both managed and unmanaged resources; <see langword="false"/> to release only unmanaged resources.
+        /// </param>
+        /// <remarks>
+        /// If you override this method in a derived class, be sure to call the base class's <see cref="Dispose(bool)"/> method.
+        /// </remarks>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    if (_stoppingCts is not null)
+                    {
+                        _stoppingCts.Cancel();
+                        _stoppingCts.Dispose();
+                        _stoppingCts = null;
+                    }
+                }
+
+                _disposed = true;
+            }
         }
     }
 }
