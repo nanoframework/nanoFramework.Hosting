@@ -1,15 +1,10 @@
-﻿//
-// Copyright (c) .NET Foundation and Contributors
-// See LICENSE file in the project root for full license information.
-//
-
+﻿using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
-using Microsoft.Extensions.Hosting;
 
 namespace nanoFramework.Hosting.UnitTests.Mocks
 {
-    public class MockHostedService : IHostedService, IMockHostedService
+    internal class BackgroundServiceMock: BackgroundService, IHostedServiceMock
     {
         private readonly ManualResetEvent _executeAsyncCalled = new(false);
         private readonly ManualResetEvent _executeAsyncCompleted = new(false);
@@ -19,7 +14,7 @@ namespace nanoFramework.Hosting.UnitTests.Mocks
         private readonly bool _startThrowsException;
         private readonly bool _stopThrowsException;
 
-        public MockHostedService(bool startThrowsException = false, bool stopThrowsException = false)
+        public BackgroundServiceMock(bool startThrowsException = false, bool stopThrowsException = false)
         {
             _startThrowsException = startThrowsException;
             _stopThrowsException = stopThrowsException;
@@ -30,25 +25,38 @@ namespace nanoFramework.Hosting.UnitTests.Mocks
         public WaitHandle StartAsyncCalled => _startAsyncCalled;
         public WaitHandle StopAsyncCalled => _stopAsyncCalled;
 
-        public void StartAsync(CancellationToken cancellationToken)
+        protected override void ExecuteAsync(CancellationToken stoppingToken)
+        {
+            _executeAsyncCalled.Set();
+
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                TestHelper.Sleep();
+            }
+
+            _executeAsyncCompleted.Set();
+        }
+
+        public override void StartAsync(CancellationToken cancellationToken)
         {
             if (_startThrowsException)
             {
                 throw new Exception();
             }
 
-            _startAsyncCalled.Set();
+            base.StartAsync(cancellationToken);
 
-            _executeAsyncCalled.Set();
-            _executeAsyncCompleted.Set();
+            _startAsyncCalled.Set();
         }
 
-        public void StopAsync(CancellationToken cancellationToken)
+        public override void StopAsync(CancellationToken cancellationToken)
         {
             if (_stopThrowsException)
             {
                 throw new Exception();
             }
+
+            base.StopAsync(cancellationToken);
 
             _stopAsyncCalled.Set();
         }

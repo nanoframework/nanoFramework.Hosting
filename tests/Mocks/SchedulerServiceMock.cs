@@ -1,10 +1,15 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿//
+// Copyright (c) .NET Foundation and Contributors
+// See LICENSE file in the project root for full license information.
+//
+
 using System;
 using System.Threading;
+using Microsoft.Extensions.Hosting;
 
 namespace nanoFramework.Hosting.UnitTests.Mocks
 {
-    internal class MockBackgroundService: BackgroundService, IMockHostedService
+    public class SchedulerServiceMock : SchedulerService, IHostedServiceMock
     {
         private readonly ManualResetEvent _executeAsyncCalled = new(false);
         private readonly ManualResetEvent _executeAsyncCompleted = new(false);
@@ -14,7 +19,7 @@ namespace nanoFramework.Hosting.UnitTests.Mocks
         private readonly bool _startThrowsException;
         private readonly bool _stopThrowsException;
 
-        public MockBackgroundService(bool startThrowsException = false, bool stopThrowsException = false)
+        public SchedulerServiceMock(bool startThrowsException = false, bool stopThrowsException = false): base(TestHelper.SleepDelay)
         {
             _startThrowsException = startThrowsException;
             _stopThrowsException = stopThrowsException;
@@ -25,14 +30,13 @@ namespace nanoFramework.Hosting.UnitTests.Mocks
         public WaitHandle StartAsyncCalled => _startAsyncCalled;
         public WaitHandle StopAsyncCalled => _stopAsyncCalled;
 
+        public int Executions { get; private set; }
+
         protected override void ExecuteAsync(CancellationToken stoppingToken)
         {
             _executeAsyncCalled.Set();
-
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                TestHelper.Sleep();
-            }
+          
+            Executions++;
 
             _executeAsyncCompleted.Set();
         }

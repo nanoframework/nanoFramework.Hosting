@@ -2,7 +2,7 @@
 
 namespace nanoFramework.Hosting.UnitTests.Mocks
 {
-    internal interface IMockHostedService
+    internal interface IHostedServiceMock
     {
         public WaitHandle ExecuteAsyncCalled { get; }
         public WaitHandle ExecuteAsyncCompleted { get; }

@@ -16,7 +16,7 @@ namespace nanoFramework.Hosting.UnitTests
         public void Dispose_stops_thread()
         {
             var cancellationToken = new CancellationTokenSource().Token;
-            var service = new MockBackgroundService();
+            var service = new BackgroundServiceMock();
 
             service.StartAsync(cancellationToken);
 
@@ -32,7 +32,7 @@ namespace nanoFramework.Hosting.UnitTests
         public void StartAsync_starts_thread()
         {
             var cancellationToken = new CancellationTokenSource().Token;
-            using var service = new MockBackgroundService();
+            using var service = new BackgroundServiceMock();
 
             service.StartAsync(cancellationToken);
 
@@ -44,7 +44,7 @@ namespace nanoFramework.Hosting.UnitTests
         public void StopAsync_stops_thread()
         {
             var cancellationToken = new CancellationTokenSource().Token;
-            var service = new MockBackgroundService();
+            var service = new BackgroundServiceMock();
 
             service.StartAsync(cancellationToken);
 

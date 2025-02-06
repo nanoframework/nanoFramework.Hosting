@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace nanoFramework.Hosting.UnitTests.Mocks
 {
-    public class MockSchedulerService : SchedulerService, IMockHostedService
+    public class HostedServiceMock : IHostedService, IHostedServiceMock
     {
         private readonly ManualResetEvent _executeAsyncCalled = new(false);
         private readonly ManualResetEvent _executeAsyncCompleted = new(false);
@@ -19,7 +19,7 @@ namespace nanoFramework.Hosting.UnitTests.Mocks
         private readonly bool _startThrowsException;
         private readonly bool _stopThrowsException;
 
-        public MockSchedulerService(bool startThrowsException = false, bool stopThrowsException = false): base(TestHelper.SleepDelay)
+        public HostedServiceMock(bool startThrowsException = false, bool stopThrowsException = false)
         {
             _startThrowsException = startThrowsException;
             _stopThrowsException = stopThrowsException;
@@ -30,37 +30,25 @@ namespace nanoFramework.Hosting.UnitTests.Mocks
         public WaitHandle StartAsyncCalled => _startAsyncCalled;
         public WaitHandle StopAsyncCalled => _stopAsyncCalled;
 
-        public int Executions { get; private set; }
-
-        protected override void ExecuteAsync(CancellationToken stoppingToken)
-        {
-            _executeAsyncCalled.Set();
-          
-            Executions++;
-
-            _executeAsyncCompleted.Set();
-        }
-
-        public override void StartAsync(CancellationToken cancellationToken)
+        public void StartAsync(CancellationToken cancellationToken)
         {
             if (_startThrowsException)
             {
                 throw new Exception();
             }
 
-            base.StartAsync(cancellationToken);
-
             _startAsyncCalled.Set();
+
+            _executeAsyncCalled.Set();
+            _executeAsyncCompleted.Set();
         }
 
-        public override void StopAsync(CancellationToken cancellationToken)
+        public void StopAsync(CancellationToken cancellationToken)
         {
             if (_stopThrowsException)
             {
                 throw new Exception();
             }
-
-            base.StopAsync(cancellationToken);
 
             _stopAsyncCalled.Set();
         }

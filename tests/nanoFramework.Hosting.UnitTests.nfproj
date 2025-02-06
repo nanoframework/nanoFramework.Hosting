@@ -33,13 +33,13 @@
     <Compile Include="BackgroundServiceTests.cs" />
     <Compile Include="HostBuilderTests.cs" />
     <Compile Include="Internal\HostTests.cs" />
-    <Compile Include="Mocks\IMockHostedService.cs" />
+    <Compile Include="Mocks\IHostedServiceMock.cs" />
     <Compile Include="Mocks\LoggerMock.cs" />
-    <Compile Include="Mocks\MockBackgroundService.cs" />
+    <Compile Include="Mocks\BackgroundServiceMock.cs" />
     <Compile Include="Mocks\ServiceB.cs" />
     <Compile Include="Mocks\ServiceA.cs" />
-    <Compile Include="Mocks\MockHostedService.cs" />
-    <Compile Include="Mocks\MockSchedulerService.cs" />
+    <Compile Include="Mocks\HostedServiceMock.cs" />
+    <Compile Include="Mocks\SchedulerServiceMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchedulerServiceTests.cs" />
     <Compile Include="TestHelper.cs" />

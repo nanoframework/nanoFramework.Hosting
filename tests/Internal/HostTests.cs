@@ -18,9 +18,9 @@ namespace nanoFramework.Hosting.UnitTests.Internal
 
             hostBuilder.ConfigureServices(services =>
             {
-                services.AddHostedService(_ => new MockBackgroundService());
-                services.AddHostedService(_ => new MockHostedService());
-                services.AddHostedService(_ => new MockSchedulerService());
+                services.AddHostedService(_ => new BackgroundServiceMock());
+                services.AddHostedService(_ => new HostedServiceMock());
+                services.AddHostedService(_ => new SchedulerServiceMock());
             });
 
             using var host = hostBuilder.Build();
@@ -31,7 +31,7 @@ namespace nanoFramework.Hosting.UnitTests.Internal
 
             foreach (var hostedService in hostedServices)
             {
-                if (hostedService is not IMockHostedService mockHostedService)
+                if (hostedService is not IHostedServiceMock mockHostedService)
                 {
                     continue;
                 }
@@ -49,9 +49,9 @@ namespace nanoFramework.Hosting.UnitTests.Internal
 
             hostBuilder.ConfigureServices(services =>
             {
-                services.AddHostedService(_ => new MockBackgroundService(startThrowsException: true));
-                services.AddHostedService(_ => new MockHostedService(startThrowsException: true));
-                services.AddHostedService(_ => new MockSchedulerService(startThrowsException: true));
+                services.AddHostedService(_ => new BackgroundServiceMock(startThrowsException: true));
+                services.AddHostedService(_ => new HostedServiceMock(startThrowsException: true));
+                services.AddHostedService(_ => new SchedulerServiceMock(startThrowsException: true));
                 services.AddSingleton(typeof(ILogger), logger);
             });
 
@@ -74,9 +74,9 @@ namespace nanoFramework.Hosting.UnitTests.Internal
 
             hostBuilder.ConfigureServices(services =>
             {
-                services.AddHostedService(_ => new MockBackgroundService());
-                services.AddHostedService(_ => new MockHostedService());
-                services.AddHostedService(_ => new MockSchedulerService());
+                services.AddHostedService(_ => new BackgroundServiceMock());
+                services.AddHostedService(_ => new HostedServiceMock());
+                services.AddHostedService(_ => new SchedulerServiceMock());
             });
 
             using var host = hostBuilder.Build();
@@ -87,7 +87,7 @@ namespace nanoFramework.Hosting.UnitTests.Internal
 
             foreach (var hostedService in hostedServices)
             {
-                if (hostedService is not IMockHostedService mockHostedService)
+                if (hostedService is not IHostedServiceMock mockHostedService)
                 {
                     continue;
                 }
@@ -100,7 +100,7 @@ namespace nanoFramework.Hosting.UnitTests.Internal
 
             foreach (var hostedService in hostedServices)
             {
-                if (hostedService is not IMockHostedService mockHostedService)
+                if (hostedService is not IHostedServiceMock mockHostedService)
                 {
                     continue;
                 }
@@ -117,9 +117,9 @@ namespace nanoFramework.Hosting.UnitTests.Internal
 
             hostBuilder.ConfigureServices(services =>
             {
-                services.AddHostedService(_ => new MockBackgroundService(stopThrowsException: true));
-                services.AddHostedService(_ => new MockHostedService(stopThrowsException: true));
-                services.AddHostedService(_ => new MockSchedulerService(stopThrowsException: true));
+                services.AddHostedService(_ => new BackgroundServiceMock(stopThrowsException: true));
+                services.AddHostedService(_ => new HostedServiceMock(stopThrowsException: true));
+                services.AddHostedService(_ => new SchedulerServiceMock(stopThrowsException: true));
             });
 
 
