@@ -20,6 +20,7 @@ The .NET nanoFramework Generic Host provides convenience methods for creating [d
 [Hosting Unit Tests](https://github.com/nanoframework/nanoFramework.Hosting/tree/main/tests)
 
 ## Generic Host
+
 A Generic Host configures a DI application container as well as provides services in the DI container which handle the the application lifetime. When a host starts it calls `Start()` on each implementation of `IHostedService` registered in the service container's collection of hosted services. In the application container all `IHostedService` object that inherent `BackgroundService` or `SchedulerService` have their `ExecuteAsync()` methods called.
 
 This API mirrors as close as possible the official .NET 
@@ -197,6 +198,6 @@ The **nanoFramework** Class Libraries are licensed under the [MIT license](LICEN
 This project has adopted the code of conduct defined by the Contributor Covenant to clarify expected behaviour in our community.
 For more information see the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct).
 
-### .NET Foundation
+## .NET Foundation
 
 This project is supported by the [.NET Foundation](https://dotnetfoundation.org).
