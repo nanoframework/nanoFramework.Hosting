@@ -52,10 +52,10 @@
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.30\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Logging">
-      <HintPath>..\packages\nanoFramework.Logging.1.1.147\lib\nanoFramework.Logging.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.Logging.1.1.151\lib\nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.System.Collections">
-      <HintPath>..\packages\nanoFramework.System.Collections.1.5.62\lib\nanoFramework.System.Collections.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.System.Collections.1.5.63\lib\nanoFramework.System.Collections.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.TestFramework, Version=3.0.69.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.TestFramework.3.0.69\lib\nanoFramework.TestFramework.dll</HintPath>
@@ -64,7 +64,7 @@
       <HintPath>..\packages\nanoFramework.TestFramework.3.0.69\lib\nanoFramework.UnitTestLauncher.exe</HintPath>
     </Reference>
     <Reference Include="System.Threading">
-      <HintPath>..\packages\nanoFramework.System.Threading.1.1.49\lib\System.Threading.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.System.Threading.1.1.50\lib\System.Threading.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
