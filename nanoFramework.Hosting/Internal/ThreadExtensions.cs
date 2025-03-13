@@ -9,7 +9,7 @@ using System.Threading;
 namespace Microsoft.Extensions.Hosting.Internal
 {
     /// <summary>
-    /// Extension methods for <see cref="Thread"/>
+    /// Extension methods for <see cref="Thread"/>.
     /// </summary>
     // TODO: Move this to System.Threading?
     internal static class ThreadExtensions
