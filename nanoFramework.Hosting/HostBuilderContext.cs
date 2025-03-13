@@ -4,8 +4,9 @@
 //
 
 using System;
+using System.Collections;
 
-namespace nanoFramework.Hosting
+namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
     /// Context containing the common services on the <see cref="IHost" />. Some properties may be null until set by the <see cref="IHost" />.
@@ -13,14 +14,12 @@ namespace nanoFramework.Hosting
     public class HostBuilderContext
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="HostBuilderContext"/> class.
+        /// Initializes a new instance of <see cref="HostBuilderContext"/>.
         /// </summary>
-        public HostBuilderContext(object[] properties)
+        /// <param name="properties">A non-null <see cref="Hashtable"/> for sharing state between components during the host building process.</param>
+        public HostBuilderContext(Hashtable properties)
         {
-            if (properties == null)
-            {
-                throw new ArgumentNullException();
-            }
+            ArgumentNullException.ThrowIfNull(properties);
 
             Properties = properties;
         }
@@ -28,6 +27,6 @@ namespace nanoFramework.Hosting
         /// <summary>
         /// A central location for sharing state between components during the host building process.
         /// </summary>
-        public object[] Properties { get; }
+        public Hashtable Properties { get; }
     }
 }

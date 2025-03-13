@@ -22,6 +22,8 @@
     <TestProjectType>UnitTest</TestProjectType>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <Nullable>Enable</Nullable>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <PropertyGroup>
@@ -29,18 +31,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BackgroundServiceTests.cs" />
-    <Compile Include="Fakes\ExecptionSchedulerService.cs" />
-    <Compile Include="Fakes\ServiceB.cs" />
-    <Compile Include="Fakes\ServiceA.cs" />
-    <Compile Include="Fakes\ExceptionHostedService.cs" />
-    <Compile Include="Fakes\FakeHostedService.cs" />
-    <Compile Include="Fakes\ExecptionBackgroundService.cs" />
-    <Compile Include="Fakes\FakeBackgroundService.cs" />
-    <Compile Include="Fakes\FakeSchedulerService.cs" />
-    <Compile Include="HostingTests.cs" />
+    <Compile Include="HostBuilderTests.cs" />
+    <Compile Include="Internal\HostTests.cs" />
+    <Compile Include="Mocks\IHostedServiceMock.cs" />
+    <Compile Include="Mocks\LoggerMock.cs" />
+    <Compile Include="Mocks\BackgroundServiceMock.cs" />
+    <Compile Include="Mocks\ServiceB.cs" />
+    <Compile Include="Mocks\ServiceA.cs" />
+    <Compile Include="Mocks\HostedServiceMock.cs" />
+    <Compile Include="Mocks\SchedulerServiceMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HostedServiceTests.cs" />
     <Compile Include="SchedulerServiceTests.cs" />
+    <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib, Version=1.17.7.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
@@ -49,11 +51,20 @@
     <Reference Include="nanoFramework.DependencyInjection, Version=1.1.30.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.30\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
+    <Reference Include="nanoFramework.Logging">
+      <HintPath>..\packages\nanoFramework.Logging.1.1.151\lib\nanoFramework.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.System.Collections">
+      <HintPath>..\packages\nanoFramework.System.Collections.1.5.63\lib\nanoFramework.System.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="nanoFramework.TestFramework, Version=3.0.69.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.TestFramework.3.0.69\lib\nanoFramework.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.UnitTestLauncher, Version=0.0.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.TestFramework.3.0.69\lib\nanoFramework.UnitTestLauncher.exe</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>..\packages\nanoFramework.System.Threading.1.1.50\lib\System.Threading.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

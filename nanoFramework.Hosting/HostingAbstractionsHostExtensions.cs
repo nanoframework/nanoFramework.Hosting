@@ -3,12 +3,10 @@
 // See LICENSE file in the project root for full license information.
 //
 
-using System;
 using System.Threading;
 
-namespace nanoFramework.Hosting
+namespace Microsoft.Extensions.Hosting
 {
-
     /// <summary>
     /// Extensions for <see cref="IHost"/>.
     /// </summary>
@@ -20,12 +18,7 @@ namespace nanoFramework.Hosting
         /// <param name="host">The <see cref="IHost"/> to run.</param>
         public static void Run(this IHost host)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            host.Start();
+            host.StartAsync();
 
             Thread.Sleep(Timeout.Infinite);
         }

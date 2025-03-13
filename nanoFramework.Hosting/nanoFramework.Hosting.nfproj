@@ -13,12 +13,14 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <FileAlignment>512</FileAlignment>
-    <RootNamespace>nanoFramework.Hosting</RootNamespace>
+    <RootNamespace>Microsoft.Extensions.Hosting</RootNamespace>
     <AssemblyName>nanoFramework.Hosting</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <NF_IsCoreLibrary>True</NF_IsCoreLibrary>
     <DocumentationFile>bin\$(Configuration)\nanoFramework.Hosting.xml</DocumentationFile>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <Nullable>Enable</Nullable>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -28,26 +30,33 @@
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>direct</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
-    <Compile Include="Hosting\SchedulerService.cs" />
-    <Compile Include="Hosting\BackgroundService.cs" />
-    <Compile Include="Hosting\Host.cs" />
-    <Compile Include="Hosting\HostBuilder.cs" />
-    <Compile Include="Hosting\HostBuilderContext.cs" />
-    <Compile Include="Hosting\HostingAbstractionsHostExtensions.cs" />
-    <Compile Include="Hosting\HostingHostBuilderExtensions.cs" />
-    <Compile Include="Hosting\IHost.cs" />
-    <Compile Include="Hosting\IHostBuilder.cs" />
-    <Compile Include="Hosting\IHostedService.cs" />
-    <Compile Include="Hosting\Internal.Host.cs" />
-    <Compile Include="Hosting\ProviderAction.cs" />
-    <Compile Include="Hosting\ServiceCollectionHostedServiceExtensions.cs" />
-    <Compile Include="Hosting\ServiceAction.cs" />
-    <Compile Include="Hosting\ProviderContextDelegate.cs" />
-    <Compile Include="Hosting\ServiceContextDelegate.cs" />
+    <Compile Include="SchedulerService.cs" />
+    <Compile Include="BackgroundService.cs" />
+    <Compile Include="Host.cs" />
+    <Compile Include="HostBuilder.cs" />
+    <Compile Include="HostBuilderContext.cs" />
+    <Compile Include="HostingAbstractionsHostExtensions.cs" />
+    <Compile Include="HostingHostBuilderExtensions.cs" />
+    <Compile Include="IHost.cs" />
+    <Compile Include="IHostBuilder.cs" />
+    <Compile Include="IHostedService.cs" />
+    <Compile Include="Internal\Host.cs" />
+    <Compile Include="ProviderAction.cs" />
+    <Compile Include="ServiceCollectionHostedServiceExtensions.cs" />
+    <Compile Include="ServiceAction.cs" />
+    <Compile Include="ProviderContextDelegate.cs" />
+    <Compile Include="ServiceContextDelegate.cs" />
+    <Compile Include="Internal\ThreadExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceProviderExtensions.cs" />
+    <Compile Include="Internal\TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib, Version=1.17.7.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
@@ -55,6 +64,15 @@
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection, Version=1.1.30.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.30\lib\nanoFramework.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Logging">
+      <HintPath>..\packages\nanoFramework.Logging.1.1.151\lib\nanoFramework.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.System.Collections">
+      <HintPath>..\packages\nanoFramework.System.Collections.1.5.63\lib\nanoFramework.System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>..\packages\nanoFramework.System.Threading.1.1.50\lib\System.Threading.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
