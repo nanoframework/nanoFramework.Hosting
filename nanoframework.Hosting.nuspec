@@ -18,9 +18,9 @@
     <description>This package includes the nanoframework.Hosting assembly for .NET nanoFramework C# projects.</description>
     <tags>nanoFramework C# csharp netmf netnf hosting di dependencyinjection</tags>
     <dependencies>
-      <dependency id="nanoFramework.DependencyInjection" version="1.1.30" />
+      <dependency id="nanoFramework.DependencyInjection" version="1.1.32" />
       <dependency id="nanoFramework.Logging" version="1.1.151" />
-      <dependency id="nanoFramework.System.Collections" version="1.5.63" />
+      <dependency id="nanoFramework.System.Collections" version="1.5.67" />
       <dependency id="nanoFramework.System.Threading" version="1.1.50" />
     </dependencies>
   </metadata>
