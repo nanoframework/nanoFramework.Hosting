@@ -18,21 +18,19 @@
     <description>This package includes the nanoframework.Hosting assembly for .NET nanoFramework C# projects.</description>
     <tags>nanoFramework C# csharp netmf netnf hosting di dependencyinjection</tags>
     <dependencies>
-      <dependency id="nanoFramework.DependencyInjection" version="1.1.32" />
-      <dependency id="nanoFramework.Logging" version="1.1.161" />
-      <dependency id="nanoFramework.System.Collections" version="1.5.67" />
-      <dependency id="nanoFramework.System.Threading" version="1.1.52" />
+      <group targetFramework=".NETnanoFramework1.0">
+        <dependency id="nanoFramework.DependencyInjection" version="2.0.0-preview.4" />
+        <dependency id="nanoFramework.Logging" version="2.0.0-preview.3" />
+        <dependency id="nanoFramework.System.Collections" version="2.0.0-preview.8" />
+        <dependency id="nanoFramework.System.Threading" version="2.0.0-preview.6" />
+      </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.dll" target="lib\nanoFramework.Hosting.dll" />
-    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.pdb" target="lib\nanoFramework.Hosting.pdb" />
-    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.pdbx" target="lib\nanoFramework.Hosting.pdbx" />
-    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.pe" target="lib\nanoFramework.Hosting.pe" />
-    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.xml" target="lib\nanoFramework.Hosting.xml" />
-    <file src="assets\readme.txt" target="" />
     <file src="README.md" target="docs\" />
-    <file src="assets\nf-logo.png" target="images\" />
+    <file src="assets\readme.txt" target="" />
     <file src="LICENSE.md" target="" />
+    <file src="assets\nf-logo.png" target="images" />
+    <file src="nanoFramework.Hosting\bin\Release\nanoFramework.Hosting.*" target="lib\netnano1.0" />
   </files>
 </package>
