@@ -59,20 +59,20 @@
     <Compile Include="Internal\TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib">
-      <HintPath>..\packages\nanoFramework.CoreLibrary.2.0.0-preview.35\lib\netnano1.0\mscorlib.dll</HintPath>
+    <Reference Include="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.CoreLibrary.2.0.0-preview.39\lib\netnano1.0\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection">
       <HintPath>..\packages\nanoFramework.DependencyInjection.2.0.0-preview.4\lib\netnano1.0\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Logging">
-      <HintPath>..\packages\nanoFramework.Logging.2.0.0-preview.3\lib\netnano1.0\nanoFramework.Logging.dll</HintPath>
+    <Reference Include="nanoFramework.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.Logging.2.0.0-preview.4\lib\netnano1.0\nanoFramework.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.System.Collections">
-      <HintPath>..\packages\nanoFramework.System.Collections.2.0.0-preview.8\lib\nanoFramework.System.Collections.dll</HintPath>
+    <Reference Include="nanoFramework.System.Collections, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.Collections.2.0.0-preview.11\lib\netnano1.0\nanoFramework.System.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading">
-      <HintPath>..\packages\nanoFramework.System.Threading.2.0.0-preview.6\lib\System.Threading.dll</HintPath>
+    <Reference Include="System.Threading, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.Threading.2.0.0-preview.8\lib\netnano1.0\System.Threading.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
