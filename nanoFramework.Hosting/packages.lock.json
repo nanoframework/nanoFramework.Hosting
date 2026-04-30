@@ -16,9 +16,9 @@
       },
       "nanoFramework.Logging": {
         "type": "Direct",
-        "requested": "[2.0.0-preview.5, 2.0.0-preview.5]",
-        "resolved": "2.0.0-preview.5",
-        "contentHash": "o1jLriHKN9bQNiLiPJ5WkJzN6fu5M18WXfq2UOEKROneWmaHgGm2d62Np/bfzO/KiMm38yNpjFGS2WbmhkJ/9w=="
+        "requested": "[2.0.0-preview.11, 2.0.0-preview.11]",
+        "resolved": "2.0.0-preview.11",
+        "contentHash": "3NXbTc68Kvywd/m0w6hizNPkn0th9oySwq6hhwb+O0zn3ktopt4+2d2iBi8j1JUs1R3HBGiOXu8sCnmqyPTUow=="
       },
       "nanoFramework.System.Collections": {
         "type": "Direct",
@@ -28,9 +28,9 @@
       },
       "nanoFramework.System.Threading": {
         "type": "Direct",
-        "requested": "[2.0.0-preview.8, 2.0.0-preview.8]",
-        "resolved": "2.0.0-preview.8",
-        "contentHash": "NXC2Pqm+ohhFyL4wJczP7wT29JCPueDFG5mCpBvDfcEpJokThY1hovim3NJybX9T2n6NR8lhZ3fCzYKd0WMRuA=="
+        "requested": "[2.0.0-preview.9, 2.0.0-preview.9]",
+        "resolved": "2.0.0-preview.9",
+        "contentHash": "5bn3gYlNFhufVyypUUoBbmVZm3l502UikPvS4JbHJZXeEzWpUVBLUlcMOP9s9zFtinZ8F8KJixYFJaDKvvn5UQ=="
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
