@@ -20,7 +20,7 @@
     <dependencies>
       <group targetFramework=".NETnanoFramework1.0">
         <dependency id="nanoFramework.DependencyInjection" version="2.0.0-preview.7" />
-        <dependency id="nanoFramework.Logging" version="2.0.0-preview.20" />
+        <dependency id="nanoFramework.Logging" version="2.0.0-preview.21" />
         <dependency id="nanoFramework.System.Collections" version="2.0.0-preview.14" />
         <dependency id="nanoFramework.System.Threading" version="2.0.0-preview.11" />
       </group>
